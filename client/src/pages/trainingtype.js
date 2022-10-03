@@ -14,11 +14,14 @@ function TrainingType(){
             </Link>
             <p className={TrainingTypeStyle.title}>Select Training Type</p>
             <div className={TrainingTypeStyle.cardContainer}>
-                {<Card 
-                    title="Quick Test" 
-                    questionCount={"5 questions each category"} 
-                    info="Coming soon. . ."
+                <Link to="/category-selection">
+                    {<Card 
+                        title="Quick Test" 
+                        questionCount={"5 questions each category"} 
+                        info="Coming soon. . ."
                     />}
+                </Link>
+                
                 {<Card 
                     title="Professional" 
                     questionCount={300} 

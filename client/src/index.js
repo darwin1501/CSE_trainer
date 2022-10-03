@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 import TrainingType from 'pages/trainingtype';
+import CategorySelection from 'pages/category_selection';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}/>
-        <Route path='/trainingtype' element={<TrainingType />}/>
+        <Route path='/trainingtype' element={<TrainingType />} />
+        <Route path='/category-selection' element={<CategorySelection />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
