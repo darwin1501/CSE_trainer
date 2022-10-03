@@ -1,0 +1,34 @@
+
+
+
+.btn{
+    padding: 20px;
+    border-radius: 40px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    margin:0 10% 0 10%;
+}
+
+.info{
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.title{
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+.title, .info{
+    text-align: center;
+}
+
