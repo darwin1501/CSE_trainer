@@ -6,8 +6,8 @@ function TrainingType(){
     return (
         <div>
             <Link to='/'>
-            <div className={TrainingTypeStyle.backIconContainer}>
-                <span className={`material-symbols-outlined ${TrainingTypeStyle.backIcon}`}>
+            <div>
+                <span className="material-symbols-outlined back-icon">
                     arrow_back_ios
                 </span>
             </div>
@@ -18,7 +18,7 @@ function TrainingType(){
                     {<Card 
                         title="Quick Test" 
                         questionCount={"5 questions each category"} 
-                        info="Coming soon. . ."
+                        info="A quick CSE test"
                     />}
                 </Link>
                 

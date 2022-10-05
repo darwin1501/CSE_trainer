@@ -1,0 +1,38 @@
+.align-left{
+    align-items: flex-start;
+}
+.align-center{
+    align-items: center;
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-center{
+    justify-content: center;
+}
+
+.flex-end{
+    justify-content: flex-end;
+}
+
+.flex-start{
+    justify-content: flex-start;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.gap-sm{
+    gap: 10px
+}
+
+.gap-md{
+    gap: 20px;
+}
+
+.gap-lg{
+    gap: 40px;
+}

@@ -5,6 +5,19 @@ body{
     margin: 0
 }
 
+.back-icon{
+  padding: 10px;
+}
+.checkbox{
+  width: 25px;
+  height: 25px;
+}
+a{
+  text-decoration: none;
+  color: inherit; 
+}
+
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
