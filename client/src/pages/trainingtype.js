@@ -14,7 +14,7 @@ function TrainingType(){
             </Link>
             <p className={TrainingTypeStyle.title}>Select Training Type</p>
             <div className={TrainingTypeStyle.cardContainer}>
-                <Link to="/category-selection">
+                <Link to="/quick-test/category-selection">
                     {<Card 
                         title="Quick Test" 
                         questionCount={"5 questions each category"} 

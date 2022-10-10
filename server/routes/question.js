@@ -37,4 +37,42 @@ recordRoutes.route('/grouped-questions').get(function (req, res) {
     })
 })
 
+// the aggregation pipelines below
+// has two stages, first it filters the documents by question type, and the second is
+// randomly select documents on the filtered result at stage 1.
+recordRoutes.route('/questions/get/:category/:questionCount').get(function (req, res) {
+  let db_connect = dbo.getDb('cse_trainer_db')
+
+  db_connect
+    .collection('questions')
+    .aggregate([
+      {
+        $match: { questionType: req.params.category }
+      },
+      {
+        $sample: { size: parseInt(req.params.questionCount) }
+      }
+    ])
+    .toArray(function (err, result) {
+      if (err) throw err
+      res.json(result)
+    })
+})
+
+recordRoutes.route('/question-groups/get/:category').get(function (req, res) {
+  let db_connect = dbo.getDb('cse_trainer_db')
+
+  db_connect
+    .collection('grouped_questions')
+    .aggregate([
+      {
+        $match: { questionType: req.params.category }
+      }
+    ])
+    .toArray(function (err, result) {
+      if (err) throw err
+      res.json(result)
+    })
+})
+
 module.exports = recordRoutes
