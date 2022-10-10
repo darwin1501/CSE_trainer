@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { CategorySelectionConsumer } from "context/categorySelectionContext";
 import { useParams } from "react-router-dom";

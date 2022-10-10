@@ -123,7 +123,7 @@ const questionMaker = async (categories, trainingType) => {
     }
   }
 
-  console.log(questions)
+  return questions
 }
 
 export default questionMaker
