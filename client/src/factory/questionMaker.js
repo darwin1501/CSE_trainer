@@ -56,28 +56,32 @@ const questionMaker = async (categories, trainingType) => {
       const shuffledQuestionGroup = shuffle(questionGroup)
       let questionGroupAdded = 0
       let ungroupQuestionLimit = 0
-      let questionGroupLimit = 0
+      let questionGroupQuestionsLimit = 0
 
       // assign ungroup question limit and question group limit
       const assignQuestionLimit = questionLimit => {
         ungroupQuestionLimit = Math.floor(Math.random() * questionLimit) + 1
-        questionGroupLimit = Math.abs(ungroupQuestionLimit - questionLimit)
+        questionGroupQuestionsLimit = Math.abs(
+          ungroupQuestionLimit - questionLimit
+        )
       }
 
       assignQuestionLimit(questionLimit)
 
       console.log(`ungroup limit: ${ungroupQuestionLimit}`)
-      console.log(`question group limit: ${questionGroupLimit}`)
+      console.log(`question group limit: ${questionGroupQuestionsLimit}`)
 
       // add some question group
       shuffledQuestionGroup.forEach(group => {
         const questionCount = Object.keys(group.questions).length
-        if (questionCount <= questionGroupLimit) {
+        if (questionCount <= questionGroupQuestionsLimit) {
+          const questionCountWhenQuestionGroupAdded =
+            questionGroupAdded + questionCount
           // check if question group is still posible to add to questions array
-          // by checking its question count if it reaches the limit if added
-          const questionCountWhenQuestionGroupAdded = questionGroupAdded + questionCount
-
-          if (questionCountWhenQuestionGroupAdded > questionGroupLimit) {
+          // by checking its question count if it reaches the limit when added
+          if (
+            questionCountWhenQuestionGroupAdded > questionGroupQuestionsLimit
+          ) {
             console.log('question count limit exeeded')
           } else {
             questionGroupAdded += questionCount
@@ -85,12 +89,18 @@ const questionMaker = async (categories, trainingType) => {
             questions.push(group)
           }
         }
-        // if question group is equal or less than to question limit
-        // push to question
-        // else don't push
       })
 
-      // add some ungroup question
+      //if question group is 0 or question group questions added in questions array is than the question group questions limit
+      if (
+        Object.keys(questionGroup).length === 0 ||
+        questionGroupAdded < questionGroupQuestionsLimit
+      ) {
+        // add the remaining question group limit to ungroup question limit
+        ungroupQuestionLimit += questionGroupQuestionsLimit
+      }
+
+      // add some ungroup question in questions array
       await getUngroupQuestions(category, ungroupQuestionLimit)
     }
   }
