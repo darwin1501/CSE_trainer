@@ -1,6 +1,8 @@
 import React from "react";
 
-const { Provider, Consumer } = React.createContext();
+const selectionContext = React.createContext()
+
+const { Provider, Consumer } = selectionContext;
 
 const CategorySelectionProvider = (props) => {
     const [selections, setSelections] = React.useState({
@@ -22,4 +24,4 @@ const CategorySelectionProvider = (props) => {
     )
 }
 
-export {CategorySelectionProvider, Consumer as CategorySelectionConsumer}
+export {CategorySelectionProvider, Consumer as CategorySelectionConsumer, selectionContext}

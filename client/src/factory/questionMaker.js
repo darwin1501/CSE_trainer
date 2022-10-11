@@ -1,5 +1,5 @@
 // returns an array of questions
-const questionMaker = async (categories, trainingType) => {
+const questionMaker =  async (categories, trainingType) => {
   const questions = []
   const { numerical, analytical, verbal, philCons, clerical } = categories
 
@@ -107,19 +107,19 @@ const questionMaker = async (categories, trainingType) => {
 
   if (trainingType === 'quickTraining') {
     if (numerical) {
-      getQuestions('Numerical', 3)
+      await getQuestions('Numerical', 3)
     }
     if (analytical) {
-      getQuestions('Analytical', 3)
+      await getQuestions('Analytical', 3)
     }
     if (verbal) {
-      getQuestions('Verbal', 3)
+      await getQuestions('Verbal', 3)
     }
     if (philCons) {
-      getQuestions('Philippine Constitution', 3)
+      await getQuestions('Philippine Constitution', 3)
     }
     if (clerical) {
-      getQuestions('Clerical', 3)
+      await getQuestions('Clerical', 3)
     }
   }
 
