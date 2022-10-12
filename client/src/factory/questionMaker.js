@@ -5,7 +5,7 @@ const questionMaker =  async (categories, trainingType) => {
 
   const getQuestions = async (category, questionLimit) => {
     // counter that decides wether to add question grou or not
-    const mixWithQuestionGroup = 1
+    const mixWithQuestionGroup = 0
     // get questions and push it to question array
     const getUngroupQuestions = async (category, questionLimit) => {
       const response = await fetch(
@@ -40,7 +40,7 @@ const questionMaker =  async (categories, trainingType) => {
     }
 
     if (mixWithQuestionGroup === 0) {
-      getUngroupQuestions(category, questionLimit)
+      await getUngroupQuestions(category, questionLimit)
     } else if (mixWithQuestionGroup === 1) {
       const questionGroup = await getQuestionGroup(category)
       const shuffle = sourceArray => {
