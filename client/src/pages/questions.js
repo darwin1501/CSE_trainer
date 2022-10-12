@@ -41,7 +41,6 @@ const Questions = () => {
     // get the first index
     if (questionIndex < questionsCount) {
       const questionData = questions[questionIndex]
-      
       // check if the question type is question group
       if (questionData.hasOwnProperty('referenceType')) {
         console.log('question group')
