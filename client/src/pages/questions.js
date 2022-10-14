@@ -18,9 +18,11 @@ const Questions = () => {
     questionType: '',
     explanation: '',
     choices: [],
-    correctAnwer: '',
+    correctAnswer: '',
     contributor: ''
   })
+
+  const [questionIndexInQuestionGroup, setQuestionIndexInQuestionGroup] = useState(0)
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -43,10 +45,57 @@ const Questions = () => {
       const questionData = questions[questionIndex]
       // check if the question type is question group
       if (questionData.hasOwnProperty('referenceType')) {
-        console.log('question group')
-        
-        // add 1 if all of the questions in question group has been displayed
-        setQuestionIndex(questionIndex + 1)
+        // console.log(questionIndex)
+        console.info(questionData)
+        console.log("question group")
+        console.log(questionIndexInQuestionGroup)
+        const questionsInGroup = questionData.questions
+        const questionsInGroupCount = Object.keys(questionsInGroup).length
+        const getAQuestionInGroup = questionsInGroup[questionIndexInQuestionGroup]
+        const {
+          _id,
+          question,
+          questionType,
+          explanation,
+          choices,
+          correctAnswer,
+          contributor
+        } = getAQuestionInGroup
+
+        setQuestionToLayout(prev => ({
+          ...prev,
+          _id: _id,
+          question: question,
+          questionType: questionType,
+          explanation: explanation,
+          choices: choices,
+          correctAnswer: correctAnswer,
+          contributor: contributor
+        }))
+  
+        setQuestionIndexInQuestionGroup(questionIndexInQuestionGroup + 1)
+        console.log(questionIndexInQuestionGroup)
+
+        // you can't access state value after setting it here
+        // you can access it outside this function
+
+        // subtract questionGroupCount by 1 so
+        // it will be accurate to compare with the
+        // questionIndexInQuestionGroup
+        // because this variable doesn't give the updated value
+        // after setting the state value here inside this function.
+
+        // check if all of the questions in question group
+        // has been displayed by comparing the index of the current question in question group
+        // to the total number of questions in question group
+        // if true
+        // then reset back the question index in question group to 0
+        // and add 1 to question index so that it will get
+        // the next question in question array
+        if (questionIndexInQuestionGroup >= questionsInGroupCount - 1) {
+          setQuestionIndex(questionIndex + 1)
+          setQuestionIndexInQuestionGroup(0)
+        } 
       } else {
         const {
           _id,
@@ -54,7 +103,7 @@ const Questions = () => {
           questionType,
           explanation,
           choices,
-          correctAnwer,
+          correctAnswer,
           contributor
         } = questionData
 
@@ -65,16 +114,15 @@ const Questions = () => {
           questionType: questionType,
           explanation: explanation,
           choices: choices,
-          correctAnwer: correctAnwer,
+          correctAnswer: correctAnswer,
           contributor: contributor
         }))
 
         console.log('ungroup  question')
         setQuestionIndex(questionIndex + 1)
       }
-      console.log(questionData)
 
-      setQuestionToLayout(questionData)
+      // setQuestionToLayout(questionData)
     } else {
       console.log('This is the last question')
     }

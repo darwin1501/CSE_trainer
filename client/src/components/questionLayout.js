@@ -65,7 +65,7 @@ const QuestionLayout = props => {
         : ''}
     </button>
   ))
-
+  
   return (
     <div className={QuestionLayoutStyle.bg}>
       <div className={QuestionLayoutStyle.container}>

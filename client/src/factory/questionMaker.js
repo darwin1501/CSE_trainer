@@ -4,8 +4,8 @@ const questionMaker =  async (categories, trainingType) => {
   const { numerical, analytical, verbal, philCons, clerical } = categories
 
   const getQuestions = async (category, questionLimit) => {
-    // counter that decides wether to add question grou or not
-    const mixWithQuestionGroup = 0
+    // counter that decides wether to add question group or not
+    const mixWithQuestionGroup = 1
     // get questions and push it to question array
     const getUngroupQuestions = async (category, questionLimit) => {
       const response = await fetch(
@@ -68,8 +68,8 @@ const questionMaker =  async (categories, trainingType) => {
 
       assignQuestionLimit(questionLimit)
 
-      console.log(`ungroup limit: ${ungroupQuestionLimit}`)
-      console.log(`question group limit: ${questionGroupQuestionsLimit}`)
+      // console.log(`ungroup limit: ${ungroupQuestionLimit}`)
+      // console.log(`question group limit: ${questionGroupQuestionsLimit}`)
 
       // add some question group
       shuffledQuestionGroup.forEach(group => {
@@ -107,19 +107,19 @@ const questionMaker =  async (categories, trainingType) => {
 
   if (trainingType === 'quickTraining') {
     if (numerical) {
-      await getQuestions('Numerical', 3)
+      await getQuestions('Numerical', 5)
     }
     if (analytical) {
-      await getQuestions('Analytical', 3)
+      await getQuestions('Analytical', 5)
     }
     if (verbal) {
-      await getQuestions('Verbal', 3)
+      await getQuestions('Verbal', 5)
     }
     if (philCons) {
-      await getQuestions('Philippine Constitution', 3)
+      await getQuestions('Philippine Constitution', 5)
     }
     if (clerical) {
-      await getQuestions('Clerical', 3)
+      await getQuestions('Clerical', 5)
     }
   }
 
