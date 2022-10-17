@@ -21,6 +21,7 @@ const Questions = () => {
     correctAnswer: '',
     contributor: ''
   })
+  const [questionReferenceToLayout, setQuestionReferenceToLayout] = useState("")
 
   const [questionIndexInQuestionGroup, setQuestionIndexInQuestionGroup] = useState(0)
 
@@ -59,8 +60,13 @@ const Questions = () => {
           explanation,
           choices,
           correctAnswer,
-          contributor
+          contributor,
         } = getAQuestionInGroup
+
+        const {
+          questionReference,
+          imageUrlAsReference
+        } = questionData
 
         setQuestionToLayout(prev => ({
           ...prev,
@@ -72,6 +78,14 @@ const Questions = () => {
           correctAnswer: correctAnswer,
           contributor: contributor
         }))
+
+        if (questionReference !== "") {
+          setQuestionReferenceToLayout(questionReference)
+          // console.log(questionReference)
+        } else if (imageUrlAsReference !== "") {
+          setQuestionReferenceToLayout(imageUrlAsReference)
+          // console.log(imageUrlAsReference)
+        }
   
         setQuestionIndexInQuestionGroup(questionIndexInQuestionGroup + 1)
         console.log(questionIndexInQuestionGroup)
@@ -91,12 +105,14 @@ const Questions = () => {
         // if true
         // then reset back the question index in question group to 0
         // and add 1 to question index so that it will get
+        // clear question reference for question group
         // the next question in question array
         if (questionIndexInQuestionGroup >= questionsInGroupCount - 1) {
           setQuestionIndex(questionIndex + 1)
           setQuestionIndexInQuestionGroup(0)
         } 
       } else {
+        setQuestionReferenceToLayout("")
         const {
           _id,
           question,
@@ -145,6 +161,7 @@ const Questions = () => {
           <QuestionLayout
             questionData={questionToLayout}
             displayQuestion={displayQuestion}
+            questionReferenceToLayout={questionReferenceToLayout}
           />
         ) : (
           <button

@@ -17,6 +17,7 @@ const QuestionLayout = props => {
     correctAnswer,
     contributor
   } = props.questionData
+  const questionReferenceInQuestions = props.questionReferenceToLayout
 
   // set choices when page loads
 
@@ -28,9 +29,23 @@ const QuestionLayout = props => {
       correctAnswer
     ]
 
+    
+    console.log(questionReferenceInQuestions)
+    if (questionReferenceInQuestions !== "") {
+      // check the type of question reference here
+      setQuestionReference(questionReferenceInQuestions)
+      if (questionReferenceInQuestions.includes("https://")) {
+        sethasImageToLoad(true)
+      } else {
+        sethasImageToLoad(false)
+      }
+    }
+
     shuffleChoices(choicesWithCorrectAnswer)
     setCompletedChoices(choicesWithCorrectAnswer)
   }, [props.questionData])
+
+  
 
   const shuffleChoices = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -81,7 +96,9 @@ const QuestionLayout = props => {
           </p>
         </div>
         {/* conditionally renders the question reference */}
-        <div className='flex flex-center'>
+        {
+          questionReferenceInQuestions !== "" &&
+          <div className='flex flex-center'>
           {hasImageToLoad === true ? (
             <img
               src={`${questionReference}`}
@@ -94,6 +111,7 @@ const QuestionLayout = props => {
             <p style={{ whiteSpace: 'pre-line' }}>{questionReference}</p>
           )}
         </div>
+        }
         <div
           className={`flex flex-center ${QuestionLayoutStyle.question_text}`}
           style={{
