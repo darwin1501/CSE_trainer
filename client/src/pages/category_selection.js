@@ -76,7 +76,7 @@ const CategorySelection = () => {
                     onChange={changeSelection}
                     checked={selections.verbal}
                   />
-                  <span>Vebal</span>
+                  <span>Verbal</span>
                 </label>
                 <label className='flex flex-center align-center gap-sm'>
                   <input

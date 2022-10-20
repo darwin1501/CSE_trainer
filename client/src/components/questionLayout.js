@@ -29,8 +29,6 @@ const QuestionLayout = props => {
       correctAnswer
     ]
 
-    
-    console.log(questionReferenceInQuestions)
     if (questionReferenceInQuestions !== "") {
       // check the type of question reference here
       setQuestionReference(questionReferenceInQuestions)
@@ -58,11 +56,38 @@ const QuestionLayout = props => {
 
   const getAnswer = event => {
     const selectedAnswer = event.target.value
-
+    let category = questionType.toLowerCase()
+    
     setShowExplanation(true)
     setSelected(selectedAnswer)
-
     setDisableButton(true)
+    
+
+    if (selectedAnswer === correctAnswer) {
+      // correct
+      props.setScores(prev => {
+        let currentScoreCategory = null
+
+        if (questionType === "Numerical") {
+          currentScoreCategory = prev.numerical
+        } else if (questionType === "Analytical") {
+          currentScoreCategory = prev.analytical
+        } else if (questionType === "Verbal") {
+          currentScoreCategory = prev.verbal
+        } else if (questionType === "Philippine Constitution") {
+          currentScoreCategory = prev.philConstitution
+          category = "philConstitution"
+        } else if (questionType === "Clerical") {
+          currentScoreCategory = prev.clerical
+        }
+
+        return {
+          ...props.scoresData,
+          mainScore: prev.mainScore + 1,
+          [category]: currentScoreCategory + 1
+        }
+      })
+    }
   }
 
   const selections = completeChoices.map(data => (
@@ -84,6 +109,18 @@ const QuestionLayout = props => {
   return (
     <div className={QuestionLayoutStyle.bg}>
       <div className={QuestionLayoutStyle.container}>
+      <div className='flex flex-end'>
+          <button
+            onClick={() => {
+              props.displayQuestion()
+              setDisableButton(false)
+              setShowExplanation(false)
+            }}
+            style={{ padding: '10px', width: '100px' }}
+          >
+            Next
+          </button>
+        </div>
         <div className='flex flex-start'>
           <p
             style={{
@@ -162,18 +199,6 @@ const QuestionLayout = props => {
             <p style={{whiteSpace: "pre-line"}} >{explanation}</p>
           </div>
         )}
-        <div className='flex flex-end'>
-          <button
-            onClick={() => {
-              props.displayQuestion()
-              setDisableButton(false)
-              setShowExplanation(false)
-            }}
-            style={{ padding: '10px', width: '100px' }}
-          >
-            Next
-          </button>
-        </div>
       </div>
     </div>
   )

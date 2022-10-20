@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import questionMaker from 'factory/questionMaker'
 import { selectionContext } from 'context/categorySelectionContext'
 import QuestionLayout from 'components/questionLayout'
+import TrainingResultViewer from 'components/TrainingResultViewer'
 
 const Questions = () => {
   const { trainingType } = useParams()
@@ -12,6 +13,7 @@ const Questions = () => {
   const [questionIndex, setQuestionIndex] = useState(0)
   const [questionsCount, setQuestionsCount] = useState(0)
   const [isTestStart, setIsTestStart] = useState(false)
+  const [isTestEnd, setIsTestEnd] = useState(false)
   const [questionToLayout, setQuestionToLayout] = useState({
     _id: '',
     question: '',
@@ -22,8 +24,17 @@ const Questions = () => {
     contributor: ''
   })
   const [questionReferenceToLayout, setQuestionReferenceToLayout] = useState("")
-
   const [questionIndexInQuestionGroup, setQuestionIndexInQuestionGroup] = useState(0)
+
+  const [scores, setScores] = useState({
+    mainScore: 0,
+    numerical: 0,
+    analytical: 0,
+    verbal: 0,
+    philConstitution: 0,
+    clerical: 0
+  })
+
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -140,7 +151,8 @@ const Questions = () => {
 
       // setQuestionToLayout(questionData)
     } else {
-      console.log('This is the last question')
+      // end of test
+      setIsTestEnd(true)
     }
   }
 
@@ -158,11 +170,15 @@ const Questions = () => {
       {/* hide start button when clicked */}
       <div className='flex flex-center'>
         {isTestStart ? (
-          <QuestionLayout
-            questionData={questionToLayout}
-            displayQuestion={displayQuestion}
-            questionReferenceToLayout={questionReferenceToLayout}
-          />
+          isTestEnd? 
+            <TrainingResultViewer scoresData={scores}/>
+           : <QuestionLayout
+           questionData={questionToLayout}
+              displayQuestion={displayQuestion}
+              scoresData={scores}
+              setScores={setScores}
+           questionReferenceToLayout={questionReferenceToLayout}
+         />
         ) : (
           <button
             onClick={() => {
