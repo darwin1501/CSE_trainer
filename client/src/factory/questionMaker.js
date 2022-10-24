@@ -1,7 +1,7 @@
 // returns an array of questions
-const questionMaker =  async (categories, trainingType) => {
+const questionMaker =  async (questionCountOnEachCategories, trainingType) => {
   const questions = []
-  const { numerical, analytical, verbal, philCons, clerical } = categories
+  const { numericalCount, analyticalCount, verbalCount, philConsCount, clericalCount } = questionCountOnEachCategories
 
   const getQuestions = async (category, questionLimit) => {
     // counter that decides wether to add question group or not
@@ -105,21 +105,23 @@ const questionMaker =  async (categories, trainingType) => {
     }
   }
 
+  
+
   if (trainingType === 'quickTraining') {
-    if (numerical) {
-      await getQuestions('Numerical', 5)
+    if (numericalCount > 0) {
+      await getQuestions('Numerical', numericalCount)
     }
-    if (analytical) {
-      await getQuestions('Analytical', 5)
+    if (analyticalCount > 0) {
+      await getQuestions('Analytical', analyticalCount)
     }
-    if (verbal) {
-      await getQuestions('Verbal', 5)
+    if (verbalCount > 0) {
+      await getQuestions('Verbal', verbalCount)
     }
-    if (philCons) {
-      await getQuestions('Philippine Constitution', 5)
+    if (philConsCount > 0) {
+      await getQuestions('Philippine Constitution', philConsCount)
     }
-    if (clerical) {
-      await getQuestions('Clerical', 5)
+    if (clericalCount > 0) {
+      await getQuestions('Clerical', clericalCount)
     }
   }
 

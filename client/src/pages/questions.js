@@ -8,7 +8,7 @@ import TrainingResultViewer from 'components/TrainingResultViewer'
 
 const Questions = () => {
   const { trainingType } = useParams()
-  const categorySelection = useContext(selectionContext)
+  const questionCount = useContext(selectionContext)
   const [questions, setQuestions] = useState([])
   const [questionIndex, setQuestionIndex] = useState(0)
   const [questionsCount, setQuestionsCount] = useState(0)
@@ -39,10 +39,10 @@ const Questions = () => {
   useEffect(() => {
     const getQuestions = async () => {
       const questionsList = await questionMaker(
-        categorySelection.value,
+        questionCount.value,
         trainingType
       )
-
+      
       setQuestions(questionsList)
       setQuestionsCount(Object.keys(questionsList).length)
     }
@@ -58,9 +58,9 @@ const Questions = () => {
       // check if the question type is question group
       if (questionData.hasOwnProperty('referenceType')) {
         // console.log(questionIndex)
-        console.info(questionData)
-        console.log("question group")
-        console.log(questionIndexInQuestionGroup)
+        // console.info(questionData)
+        // console.log("question group")
+        // console.log(questionIndexInQuestionGroup)
         const questionsInGroup = questionData.questions
         const questionsInGroupCount = Object.keys(questionsInGroup).length
         const getAQuestionInGroup = questionsInGroup[questionIndexInQuestionGroup]
