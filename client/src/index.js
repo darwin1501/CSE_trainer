@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import TrainingType from 'pages/trainingtype'
-import CategorySelection from 'pages/category_selection'
+import QuickTrainingCategorySelection from 'pages/quick_training_category_selection'
 import Questions from 'pages/questions'
 import { CategorySelectionProvider } from 'context/categorySelectionContext'
 
@@ -19,7 +19,7 @@ root.render(
         <Routes>
           <Route path='/' element={<App />} />
           <Route path='/trainingtype' element={<TrainingType />} />
-          <Route path='/quick-test/category-selection' element={<CategorySelection />} />
+          <Route path='/quick-test/category-selection' element={<QuickTrainingCategorySelection />} />
           <Route path='/questions/:trainingType' element={<Questions />} />
         </Routes>
       </BrowserRouter>
