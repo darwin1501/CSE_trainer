@@ -61,6 +61,16 @@ const QuestionLayout = props => {
     setShowExplanation(true)
     setSelected(selectedAnswer)
     setDisableButton(true)
+
+    let questionCopy = {
+      question,
+      explanation,
+      selectedAnswer,
+      correctAnswer,
+      questionReference : questionReferenceInQuestions !== "" ? questionReference : ""
+    }
+
+    props.recordQuestion(questionCopy)
     
 
     if (selectedAnswer === correctAnswer) {
