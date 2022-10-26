@@ -35,6 +35,93 @@ const Questions = () => {
     clerical: 0
   })
 
+  const [answeredQuestions, setAnsweredQuestions] = useState([])
+  const [selectedAnswer, setSelectedAnswer] = useState("")
+
+  function recordQuestion(questionData) {
+    const {
+      question,
+      explanation,
+      selectedAnswer,
+      correctAnswer,
+      questionReference
+    } = questionData
+
+    if (questionReference !== "") {
+      // group question
+      
+      // get last item in array
+      const lastQuestion = answeredQuestions[answeredQuestions.length - 1]
+      
+      // if undefined this is the first question
+      if (lastQuestion === undefined || lastQuestion.questionReference !== questionReference) {
+        // create question group
+        console.log("create new group")
+        let questionGroupData = {
+          questionReference,
+          questions: [
+            {
+              question,
+              explanation,
+              selectedAnswer,
+              correctAnswer
+            }
+          ]
+        }
+
+        setAnsweredQuestions(prev => ([...prev, questionGroupData]))
+
+      } else {
+        // check if has questionReference property
+        if (lastQuestion.hasOwnProperty("questionReference")) {
+          // add the new question in the current question group
+          console.log("has reference")
+          // update the question group
+
+          // process of updating
+          // get the the copy of old answered questions
+          const copyOfAnsweredQuestions = answeredQuestions
+          const findIndexOfMatchedQuestionGroup = (question) => question.questionReference === questionReference
+          const IndexOfMatchedQuestionGroup = copyOfAnsweredQuestions.findIndex(findIndexOfMatchedQuestionGroup)
+          const getMatchedQuestionGroup = copyOfAnsweredQuestions[IndexOfMatchedQuestionGroup]
+          // insert the new question in the questions property of that object
+          const modifiedQuestionGroup = {
+            ...getMatchedQuestionGroup,
+            questions: [
+              ...getMatchedQuestionGroup.questions,
+                {
+                  question,
+                  explanation,
+                  selectedAnswer,
+                  correctAnswer
+                }
+            ]
+          }
+          // delete the old question group in array and
+          // insert the updated question group in the index of deleted old question group in array
+          copyOfAnsweredQuestions.splice(IndexOfMatchedQuestionGroup, 1, modifiedQuestionGroup)
+          
+          // insert the modified copy of answered questions
+          setAnsweredQuestions(copyOfAnsweredQuestions)
+        }
+        
+      }
+    } else {
+      // ungroup question
+      // add new answered question
+      setAnsweredQuestions(prev => (
+        [...prev, {
+          question,
+          explanation,
+          selectedAnswer,
+          correctAnswer
+        }
+        ]))
+    }
+  }
+
+  console.log(answeredQuestions)
+
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -173,12 +260,13 @@ const Questions = () => {
           isTestEnd? 
             <TrainingResultViewer scoresData={scores}/>
            : <QuestionLayout
-           questionData={questionToLayout}
+              questionData={questionToLayout}
               displayQuestion={displayQuestion}
               scoresData={scores}
               setScores={setScores}
-           questionReferenceToLayout={questionReferenceToLayout}
-         />
+              questionReferenceToLayout={questionReferenceToLayout}
+              recordQuestion={recordQuestion}
+            />
         ) : (
           <button
             onClick={() => {
