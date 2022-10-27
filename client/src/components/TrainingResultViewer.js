@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { selectionContext } from "context/categorySelectionContext";
+import CollapsibleQuestion from "./CollapsibleQuestion";
 
 const TrainingResultViewer = (props) => {
     let totalQuestionCount = 0
@@ -30,6 +31,26 @@ const TrainingResultViewer = (props) => {
         return (value / totalValue ) * 100
     }
 
+    const answeredQuestions = props.answeredQuestions.map(questionData => {
+        if (questionData.hasOwnProperty("questionReference")) {
+            return (
+                <CollapsibleQuestion
+                questionReference={questionData.questionReference}
+                questions={questionData.questions}
+            />
+            )
+        } else {
+            return (
+                <CollapsibleQuestion
+                question={questionData.question}
+                selectedAnswer={questionData.selectedAnswer}
+                correctAnswer={questionData.correctAnswer}
+                explanation={questionData.explanation}
+            />
+            )
+        }
+    })
+
     return (
         <div className="flex flex-column align-center">
             <h2>{mainScore} / {totalQuestionCount} ({getScoreInPercentage(mainScore, totalQuestionCount)}%)</h2>
@@ -39,6 +60,9 @@ const TrainingResultViewer = (props) => {
             {verbalCount > 0 && <p>Verbal: {verbal} / { verbalCount } ({ getScoreInPercentage(verbal, verbalCount)}%)</p>}
             {philConsCount > 0 && <p>Philippine Constitution: {philConstitution} / { philConsCount } ({ getScoreInPercentage(philConstitution, philConsCount)}%)</p>}
             {clericalCount > 0 && <p>Clerical: {clerical} / { clericalCount } ({ getScoreInPercentage(clerical, clericalCount)}%)</p>}
+            <div  className="flex flex-column gap-md" style={{marginTop: "40px"}}>
+                {answeredQuestions}
+            </div>
         </div>
     )
 }
