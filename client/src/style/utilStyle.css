@@ -25,6 +25,10 @@
     flex-direction: column;
 }
 
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
 .gap-sm{
     gap: 10px
 }
