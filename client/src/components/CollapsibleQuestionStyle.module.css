@@ -1,0 +1,14 @@
+.trigger_element, .collasible_container{
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+}
+
+.trigger_element{
+    height: 20px;
+    border: 3px solid black;
+}
+.collasible_container{
+    background-color: gray;
+    
+}
