@@ -25,7 +25,6 @@ const Questions = () => {
   })
   const [questionReferenceToLayout, setQuestionReferenceToLayout] = useState("")
   const [questionIndexInQuestionGroup, setQuestionIndexInQuestionGroup] = useState(0)
-
   const [scores, setScores] = useState({
     mainScore: 0,
     numerical: 0,
@@ -34,13 +33,12 @@ const Questions = () => {
     philConstitution: 0,
     clerical: 0
   })
-
   const [answeredQuestions, setAnsweredQuestions] = useState([])
-  const [selectedAnswer, setSelectedAnswer] = useState("")
 
   function recordQuestion(questionData) {
     const {
       question,
+      questionType,
       explanation,
       selectedAnswer,
       correctAnswer,
@@ -59,6 +57,7 @@ const Questions = () => {
         console.log("create new group")
         let questionGroupData = {
           questionReference,
+          questionType,
           questions: [
             {
               question,
@@ -112,6 +111,7 @@ const Questions = () => {
       setAnsweredQuestions(prev => (
         [...prev, {
           question,
+          questionType,
           explanation,
           selectedAnswer,
           correctAnswer
