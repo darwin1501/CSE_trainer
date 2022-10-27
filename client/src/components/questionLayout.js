@@ -64,6 +64,7 @@ const QuestionLayout = props => {
 
     let questionCopy = {
       question,
+      questionType,
       explanation,
       selectedAnswer,
       correctAnswer,
