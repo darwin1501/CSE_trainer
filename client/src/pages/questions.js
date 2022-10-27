@@ -258,7 +258,7 @@ const Questions = () => {
       <div className='flex flex-center'>
         {isTestStart ? (
           isTestEnd? 
-            <TrainingResultViewer scoresData={scores}/>
+            <TrainingResultViewer scoresData={scores} answeredQuestions={answeredQuestions} />
            : <QuestionLayout
               questionData={questionToLayout}
               displayQuestion={displayQuestion}
