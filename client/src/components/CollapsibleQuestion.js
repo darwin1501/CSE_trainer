@@ -9,7 +9,7 @@ export default function CollapsibleQuestion(props) {
     function TriggerElement() {
         return (
             <div className={CollapsibleQuestionStyle.trigger_element}>
-                {questionStatus}
+                {questionStatus} {props.questionType}
             </div>
         )
     }
