@@ -41,6 +41,7 @@ const QuestionLayout = props => {
 
     shuffleChoices(choicesWithCorrectAnswer)
     setCompletedChoices(choicesWithCorrectAnswer)
+    setSelected("")
   }, [props.questionData])
 
   
@@ -121,7 +122,9 @@ const QuestionLayout = props => {
     <div className={QuestionLayoutStyle.bg}>
       <div className={QuestionLayoutStyle.container}>
       <div className='flex flex-end'>
-          <button
+          {
+            selected !== "" &&
+            <button
             onClick={() => {
               props.displayQuestion()
               setDisableButton(false)
@@ -130,7 +133,8 @@ const QuestionLayout = props => {
             style={{ padding: '10px', width: '100px' }}
           >
             Next
-          </button>
+            </button>
+          }
         </div>
         <div className='flex flex-start'>
           <p
