@@ -19,6 +19,7 @@ function TrainingType(){
                         title="Quick Test" 
                         questionCount={"5 questions each category"} 
                         info="A quick CSE test"
+                        backgroundColor = "#fffad1"
                     />}
                 </Link>
                 
@@ -26,11 +27,13 @@ function TrainingType(){
                     title="Professional" 
                     questionCount={300} 
                     info="Coming soon. . ."
+                    backgroundColor = "#fbe5f3"
                 />}
                 {<Card 
                     title="Sub Professional" 
                     questionCount={250} 
                     info="Coming soon. . ."
+                    backgroundColor = "#ddebf8"
                     />}
             </div>
        </div>

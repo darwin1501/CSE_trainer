@@ -15,6 +15,9 @@ knowledge with thousands of questions for you to answer.</p>
                     </button>
                 </Link>
             </div>
+            <footer>
+                <p>Created by: <strong>Darwin</strong></p>
+            </footer>
         </div>
     )
 }

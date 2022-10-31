@@ -1,9 +1,11 @@
 
 body{
-    background-color: #BABABA;
-    font-family: 'Roboto', sans-serif;
-    margin: 0
+    background-color: #eef6f0;
+    font-family: 'Karla', Arial, sans-serif;
+    margin: 0;
+    color: #2b2839
 }
+
 
 .back-icon{
   padding: 10px;

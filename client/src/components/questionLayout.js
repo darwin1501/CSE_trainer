@@ -114,7 +114,10 @@ const QuestionLayout = props => {
         ? selected === correctAnswer
           ? '   correct'
           : '   incorrect'
-        : ''}
+        : 
+        selected &&
+        data === correctAnswer && ' correct'
+        }
     </button>
   ))
   
@@ -136,14 +139,9 @@ const QuestionLayout = props => {
             </button>
           }
         </div>
+        {contributor !== null && <p className={QuestionLayoutStyle.info} style={{textAlign: "right"}}><strong>Question By:</strong> <br></br>{contributor}</p>}
         <div className='flex flex-start'>
-          <p
-            style={{
-              fontSize: '18px',
-              fontWeight: 'bolder',
-              opacity: '0.7'
-            }}
-          >
+          <p className={QuestionLayoutStyle.info}>
             {questionType}
           </p>
         </div>
@@ -155,9 +153,7 @@ const QuestionLayout = props => {
             <img
               src={`${questionReference}`}
               alt='question reference'
-              style={{
-                width: '30%'
-              }}
+              className={QuestionLayoutStyle.img_reference}
             />
           ) : (
             <p style={{ whiteSpace: 'pre-line' }}>{questionReference}</p>
@@ -172,7 +168,7 @@ const QuestionLayout = props => {
         >
           <p
             style={{
-              marginTop: '40px',
+              marginTop: '10px',
               marginBottom: '20px',
               whiteSpace: 'pre-line'
             }}
@@ -197,10 +193,7 @@ const QuestionLayout = props => {
           style={{
             fontWeight: 'bolder'
           }}
-        >
-          <p>
-            <p style={{ opacity: '0.7' }}>Question By:</p> {contributor}
-          </p>
+        > 
         </div>
         {(showExplanation && explanation !== "None") && (
           <div className={QuestionLayoutStyle.explanation_container}>

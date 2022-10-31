@@ -3,5 +3,11 @@
     width: 75%;
     margin: auto;
     padding: 25px;
-    background-color: white;
+    background-color: #f8ccbbe3;
+    border: 2px solid white;
+}
+.title{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 900;
 }

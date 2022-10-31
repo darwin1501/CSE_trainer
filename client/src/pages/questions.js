@@ -268,16 +268,22 @@ const Questions = () => {
               recordQuestion={recordQuestion}
             />
         ) : (
-          <button
-            onClick={() => {
-              displayQuestion()
-              setIsTestStart(true)
-            }}
-            disabled={!questions.length ? true : false}
-            style={{ padding: '10px', width: '100px' }}
-          >
-            {!questions.length ? 'Loading' : 'Start'}
-          </button>
+          
+            <div className="flex flex-center">
+              <div className="flex flex-column flex-center align-center">
+              <p style={{textAlign:"center"}}><strong>Tip:</strong> Memorize the concept not the answer.</p>
+              <button
+                onClick={() => {
+                  displayQuestion()
+                  setIsTestStart(true)
+                }}
+                disabled={!questions.length ? true : false}
+                className="btn-simple"
+              >
+                {!questions.length ? 'Loading. . .' : 'Start'}
+              </button>
+            </div>
+            </div>
         )}
       </div>
     </div>

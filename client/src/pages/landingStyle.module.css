@@ -1,12 +1,25 @@
 
-
+.btn, footer{
+    cursor: pointer;
+}
 
 .btn{
-    padding: 20px;
+    font-family: 'Karla', Arial, sans-serif;
+    padding: 25px;
     border-radius: 40px;
     border: none;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 600;
+    background-color: #5035ff;
+    color: white;
+    transition-timing-function: ease;
+    transition: transform 0.3s;
+    backface-visibility: hidden;
+}
+
+.btn:hover{
+    transform: translateY(-4px);
+    box-shadow: 2px 2px 20px 20px rgb(205, 205, 205);
 }
 
 .btnContainer{
@@ -17,18 +30,33 @@
 .container{
     margin:0 10% 0 10%;
 }
-
-.info{
-    font-size: 1rem;
-    font-weight: 300;
+footer{
+    font-size: 1.2rem;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+.title, .info{
+    text-align: center;
 }
 
 .title{
-    font-weight: 900;
-    font-size: 2rem;
+    font-weight: bolder;
 }
 
-.title, .info{
-    text-align: center;
+@media only screen and (min-width: 320px) {
+    .btnContainer{
+        margin-top: 50%;
+    }
+    .title{
+        font-size: 2.6rem;
+    }
+    .info{
+        font-size: 1.6rem;
+        font-weight: 300;
+        margin-top: 25%;
+    }
 }
 

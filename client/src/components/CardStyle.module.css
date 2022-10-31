@@ -1,12 +1,18 @@
 
 .card{
     border-radius: 10px;
-    background-color: #D9D9D9;
     cursor: pointer;
     padding: 10px;
     text-align: center;
     width: 220px;
-    margin: auto
+    margin: auto;
+    border: 3px solid white;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+    transition: 0.3s; 
+}
+
+.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .info{
@@ -14,6 +20,6 @@
 }
 
 .title{
-    font-weight: 700;
+    font-weight: 900;
     font-size: 1.2rem;
 }
