@@ -18,6 +18,8 @@ const QuestionLayout = props => {
     contributor
   } = props.questionData
   const questionReferenceInQuestions = props.questionReferenceToLayout
+  const LETTERS = ['A', 'B', 'C', 'D']
+  let letterCounter = 0;
 
   // set choices when page loads
 
@@ -29,10 +31,10 @@ const QuestionLayout = props => {
       correctAnswer
     ]
 
-    if (questionReferenceInQuestions !== "") {
+    if (questionReferenceInQuestions !== '') {
       // check the type of question reference here
       setQuestionReference(questionReferenceInQuestions)
-      if (questionReferenceInQuestions.includes("https://")) {
+      if (questionReferenceInQuestions.includes('https://')) {
         sethasImageToLoad(true)
       } else {
         sethasImageToLoad(false)
@@ -41,10 +43,8 @@ const QuestionLayout = props => {
 
     shuffleChoices(choicesWithCorrectAnswer)
     setCompletedChoices(choicesWithCorrectAnswer)
-    setSelected("")
+    setSelected('')
   }, [props.questionData])
-
-  
 
   const shuffleChoices = array => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -58,7 +58,7 @@ const QuestionLayout = props => {
   const getAnswer = event => {
     const selectedAnswer = event.target.value
     let category = questionType.toLowerCase()
-    
+
     setShowExplanation(true)
     setSelected(selectedAnswer)
     setDisableButton(true)
@@ -69,27 +69,27 @@ const QuestionLayout = props => {
       explanation,
       selectedAnswer,
       correctAnswer,
-      questionReference : questionReferenceInQuestions !== "" ? questionReference : ""
+      questionReference:
+        questionReferenceInQuestions !== '' ? questionReference : ''
     }
 
     props.recordQuestion(questionCopy)
-    
 
     if (selectedAnswer === correctAnswer) {
       // correct
       props.setScores(prev => {
         let currentScoreCategory = null
 
-        if (questionType === "Numerical") {
+        if (questionType === 'Numerical') {
           currentScoreCategory = prev.numerical
-        } else if (questionType === "Analytical") {
+        } else if (questionType === 'Analytical') {
           currentScoreCategory = prev.analytical
-        } else if (questionType === "Verbal") {
+        } else if (questionType === 'Verbal') {
           currentScoreCategory = prev.verbal
-        } else if (questionType === "Philippine Constitution") {
+        } else if (questionType === 'Philippine Constitution') {
           currentScoreCategory = prev.philConstitution
-          category = "philConstitution"
-        } else if (questionType === "Clerical") {
+          category = 'philConstitution'
+        } else if (questionType === 'Clerical') {
           currentScoreCategory = prev.clerical
         }
 
@@ -102,64 +102,86 @@ const QuestionLayout = props => {
     }
   }
 
-  const selections = completeChoices.map(data => (
-    <button
+  const selections = completeChoices.map(data => {
+    
+    let letter = LETTERS[letterCounter]
+
+    letterCounter += 1
+
+    return (
+      
+      <button
       className={QuestionLayoutStyle.btn_select}
       value={data}
       onClick={getAnswer}
-      disabled={disableButton}
-    >
-      {data}
-      {data === selected
-        ? selected === correctAnswer
-          ? '   correct'
-          : '   incorrect'
-        : 
-        selected &&
-        data === correctAnswer && ' correct'
-        }
-    </button>
-  ))
-  
+        disabled={disableButton}
+        style={{
+          backgroundColor: `${
+            /* 
+            correct #94d7a2
+            incorrect #e7a4d0
+                new E7A4BE
+          */
+            data === selected
+            ? selected === correctAnswer
+              ? '#94d7a2'
+              : '#e7a4d0'
+            : selected && data === correctAnswer && '#94d7a2'
+          }`
+        }}
+      >
+        <div className={QuestionLayoutStyle.box_sm} style={{padding: "10px", width:"15px"}}>{ letter }</div>
+        {data}
+      </button>
+    )
+  })
+
   return (
     <div className={QuestionLayoutStyle.bg}>
       <div className={QuestionLayoutStyle.container}>
-      <div className='flex flex-end'>
-          {
-            selected !== "" &&
+        <div className='flex flex-end'>
+          {selected !== '' && (
             <button
-            onClick={() => {
-              props.displayQuestion()
-              setDisableButton(false)
-              setShowExplanation(false)
-            }}
-            style={{ padding: '10px', width: '100px' }}
-          >
-            Next
+              onClick={() => {
+                props.displayQuestion()
+                setDisableButton(false)
+                setShowExplanation(false)
+              }}
+              className="btn-simple"
+            >
+              Next
             </button>
-          }
-        </div>
-        {contributor !== null && <p className={QuestionLayoutStyle.info} style={{textAlign: "right"}}><strong>Question By:</strong> <br></br>{contributor}</p>}
-        <div className='flex flex-start'>
-          <p className={QuestionLayoutStyle.info}>
-            {questionType}
-          </p>
-        </div>
-        {/* conditionally renders the question reference */}
-        {
-          questionReferenceInQuestions !== "" &&
-          <div className='flex flex-center'>
-          {hasImageToLoad === true ? (
-            <img
-              src={`${questionReference}`}
-              alt='question reference'
-              className={QuestionLayoutStyle.img_reference}
-            />
-          ) : (
-            <p style={{ whiteSpace: 'pre-line' }}>{questionReference}</p>
           )}
         </div>
-        }
+        {contributor !== null && (
+          <p
+            className={QuestionLayoutStyle.info}
+            style={{ textAlign: 'right' }}
+          >
+            <strong>Question By:</strong> <br></br>
+            {contributor}
+          </p>
+        )}
+        <div className='flex flex-start'>
+          <p className={QuestionLayoutStyle.info}>{questionType}</p>
+        </div>
+        <div className={QuestionLayoutStyle.box_sm} style={{ padding: "8px", width: "15px", marginBottom: "20px" }}>
+          {props.questionNumber}.
+        </div>
+        {/* conditionally renders the question reference */}
+        {questionReferenceInQuestions !== '' && (
+          <div className='flex flex-center'>
+            {hasImageToLoad === true ? (
+              <img
+                src={`${questionReference}`}
+                alt='question reference'
+                className={QuestionLayoutStyle.img_reference}
+              />
+            ) : (
+              <p style={{ whiteSpace: 'pre-line' }}>{questionReference}</p>
+            )}
+          </div>
+        )}
         <div
           className={`flex flex-center ${QuestionLayoutStyle.question_text}`}
           style={{
@@ -193,9 +215,8 @@ const QuestionLayout = props => {
           style={{
             fontWeight: 'bolder'
           }}
-        > 
-        </div>
-        {(showExplanation && explanation !== "None") && (
+        ></div>
+        {showExplanation && explanation !== 'None' && (
           <div className={QuestionLayoutStyle.explanation_container}>
             <p
               style={{
@@ -204,7 +225,7 @@ const QuestionLayout = props => {
             >
               Explanation
             </p>
-            <p style={{whiteSpace: "pre-line"}} >{explanation}</p>
+            <p style={{ whiteSpace: 'pre-line' }}>{explanation}</p>
           </div>
         )}
       </div>

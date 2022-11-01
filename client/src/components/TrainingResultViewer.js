@@ -23,6 +23,7 @@ const TrainingResultViewer = (props) => {
         philConstitution,
         clerical }
         = props.scoresData
+    let questionNumber = 0
     
     
     Object.entries(questionCount).forEach(count => {
@@ -51,12 +52,14 @@ const TrainingResultViewer = (props) => {
     }
 
     const answeredQuestions = answeredQuestionToView.map(questionData => {
+        questionNumber += 1
         if (questionData.hasOwnProperty("questionReference")) {
             return (
                 <CollapsibleQuestion
                     questionReference={questionData.questionReference}
                     questionType={questionData.questionType}
                     questions={questionData.questions}
+                    questionNumber={questionNumber}
                 />
             )
         } else {
@@ -67,9 +70,12 @@ const TrainingResultViewer = (props) => {
                     selectedAnswer={questionData.selectedAnswer}
                     correctAnswer={questionData.correctAnswer}
                     explanation={questionData.explanation}
+                    questionNumber={questionNumber}
                 />
             )
         }
+
+        
     })
 
     return (

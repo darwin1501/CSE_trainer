@@ -1,6 +1,8 @@
 
+/* color result */
+
 .bg{
-    background-color: #f5bf99;;
+    background-color: #eef6f0;
     position:absolute;
     top:0px;
     right:0px;
@@ -10,29 +12,34 @@
 }
 .btn_select{
     padding: 10px;
-    border-radius: 5px;
-    border:solid #2b2839 2px; 
-    width: 200px;
+    border-radius: 3px;
+    border:solid #2b2839 1px; 
+    width: 250px;
     cursor: pointer;
     text-align: center;
-    background-color: #f5bf99;
     font-family: inherit;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    color:#2b2839;
+    background-color: white;
 }
 .btn_select:hover{
-    background-color: white;
+    background-color: rgb(223, 235, 240);
 }
-.btn_select:focus{
+/* .btn_select:focus{
     background-color: white;
-}
+} */
 .container{
     width: 90%;
     margin: 3vh auto;
 }
 .explanation_container{
-    background-color: #db8d55;
     padding: 10px;
     border-radius: 5px;
     margin-top: 40px;
+    background-color: rgb(223, 235, 240);
 }
 .flex_center{
     display: flex;
@@ -43,6 +50,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+.box_sm{
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 .info{
     font-size: 16px;

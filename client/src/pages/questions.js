@@ -34,6 +34,7 @@ const Questions = () => {
     clerical: 0
   })
   const [answeredQuestions, setAnsweredQuestions] = useState([])
+  const [questionNumber, setQuestionNumber] = useState(0)
 
   function recordQuestion(questionData) {
     const {
@@ -139,6 +140,7 @@ const Questions = () => {
   }, [])
 
   const displayQuestion = () => {
+    setQuestionNumber(questionNumber + 1)
     // get the first index
     if (questionIndex < questionsCount) {
       const questionData = questions[questionIndex]
@@ -266,6 +268,7 @@ const Questions = () => {
               setScores={setScores}
               questionReferenceToLayout={questionReferenceToLayout}
               recordQuestion={recordQuestion}
+              questionNumber={questionNumber}
             />
         ) : (
           

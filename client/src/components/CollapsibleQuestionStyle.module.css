@@ -7,8 +7,21 @@
 .trigger_element{
     height: 20px;
     border: 3px solid black;
+    display: flex;
+    align-items: center;
 }
 .collasible_container{
     background-color: gray;
     
+}
+
+.number_box{
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
