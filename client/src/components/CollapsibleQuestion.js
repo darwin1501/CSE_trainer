@@ -4,25 +4,43 @@ import CollapsibleQuestionStyle from "./CollapsibleQuestionStyle.module.css"
 
 export default function CollapsibleQuestion(props) {
 
-    const [questionStatus, setQuestionStatus] = useState("")
+    const [questionStatus, setQuestionStatus] = useState("") 
 
     function TriggerElement() {
         return (
             <div className={CollapsibleQuestionStyle.trigger_element}>
-                {questionStatus} {props.questionType}
+                
+                {/* if question number has two set of number
+                    this is question group
+                */}
+                {
+                    Array.isArray(props.questionNumber) ? 
+                    <div className="flex align-center" style={{gap: "4px"}}>
+                        <div className={CollapsibleQuestionStyle.number_box}>
+                        {props.questionNumber[0]}
+                            </div>
+                            <p> - </p>
+                        <div className={CollapsibleQuestionStyle.number_box}>
+                            {props.questionNumber[1]}
+                        </div>
+                    </div>
+                        :
+                        <div className={CollapsibleQuestionStyle.number_box}>
+                            {props.questionNumber}
+                        </div>
+                }
+                {questionStatus}
             </div>
         )
     }
+    console.log(questionStatus)
 
     function UngroupQuestion() {
-        let questionResult = ""
         if (props.selectedAnswer === props.correctAnswer) {
-            questionResult = "correct"
+            setQuestionStatus("correct")
         } else {
-            questionResult = "incorrect"
+            setQuestionStatus("incorrect")
         }
-
-        setQuestionStatus(questionResult)
 
         return (
             <div>
@@ -43,14 +61,13 @@ export default function CollapsibleQuestion(props) {
     }
 
     function GroupQuestion() {
-
-        let questionResult = ""
+        let status = ""
 
         const questions = props.questions.map(questionData => {
             if (questionData.selectedAnswer === questionData.correctAnswer) {
-                questionResult += " correct"
+                status += " correct"
             } else {
-               questionResult += " incorrect"
+                status += " incorrect"
             }
             return (
                 <div>
@@ -71,7 +88,9 @@ export default function CollapsibleQuestion(props) {
             </div>
             )
         })
-        setQuestionStatus(questionResult)
+
+        setQuestionStatus(status)
+
         return (
             <div>
                 {/* <p>Reference: {props.questionReference}</p> */}

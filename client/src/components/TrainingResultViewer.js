@@ -52,17 +52,28 @@ const TrainingResultViewer = (props) => {
     }
 
     const answeredQuestions = answeredQuestionToView.map(questionData => {
-        questionNumber += 1
+        
         if (questionData.hasOwnProperty("questionReference")) {
+        
+            const questionCountInGroup = questionData.questions.length
+            // add 1 to correct the numbering at the start of questions in question group
+            const prevQuestionNumber = questionNumber + 1
+            // subtract 1 to correct the numbering at the end of questions in question group
+            const newQuestionNumber = (questionNumber + questionCountInGroup)
+            // add question count to question number
+            questionNumber += questionCountInGroup
+
+            const questionNumberToLayout = questionCountInGroup > 1 ? [prevQuestionNumber, newQuestionNumber] : questionNumber
             return (
                 <CollapsibleQuestion
                     questionReference={questionData.questionReference}
                     questionType={questionData.questionType}
                     questions={questionData.questions}
-                    questionNumber={questionNumber}
+                    questionNumber={questionNumberToLayout}
                 />
             )
         } else {
+            questionNumber += 1
             return (
                 <CollapsibleQuestion
                     question={questionData.question}
