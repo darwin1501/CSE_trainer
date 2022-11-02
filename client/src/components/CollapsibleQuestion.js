@@ -5,6 +5,19 @@ import CollapsibleQuestionStyle from "./CollapsibleQuestionStyle.module.css"
 export default function CollapsibleQuestion(props) {
 
     const [questionStatus, setQuestionStatus] = useState("") 
+    const CORRECT_STATUS = " #94d7a2"
+    const INCORRECT_STATUS = " #e7a4d0"
+
+    // eslint-disable-next-line array-callback-return
+    const questionStatusWithStyle = questionStatus.split(" ").map(status => {
+            if (status !== "") {
+                return (
+                    <div style={{ backgroundColor: `${status}`, height: "15px", width: "15px" }}>
+                    </div>
+                )
+            }
+        }
+    )
 
     function TriggerElement() {
         return (
@@ -29,7 +42,7 @@ export default function CollapsibleQuestion(props) {
                             {props.questionNumber}
                         </div>
                 }
-                {questionStatus}
+                <div className="flex gap-sm">{questionStatusWithStyle}</div>
             </div>
         )
     }
@@ -37,9 +50,9 @@ export default function CollapsibleQuestion(props) {
 
     function UngroupQuestion() {
         if (props.selectedAnswer === props.correctAnswer) {
-            setQuestionStatus("correct")
+            setQuestionStatus(CORRECT_STATUS)
         } else {
-            setQuestionStatus("incorrect")
+            setQuestionStatus(INCORRECT_STATUS)
         }
 
         return (
@@ -65,9 +78,9 @@ export default function CollapsibleQuestion(props) {
 
         const questions = props.questions.map(questionData => {
             if (questionData.selectedAnswer === questionData.correctAnswer) {
-                status += " correct"
+                status += ` ${CORRECT_STATUS}`
             } else {
-                status += " incorrect"
+                status += ` ${INCORRECT_STATUS}`
             }
             return (
                 <div>

@@ -121,9 +121,6 @@ const Questions = () => {
     }
   }
 
-  console.log(answeredQuestions)
-
-
   useEffect(() => {
     const getQuestions = async () => {
       const questionsList = await questionMaker(

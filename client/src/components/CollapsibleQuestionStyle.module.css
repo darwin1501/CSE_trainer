@@ -9,6 +9,7 @@
     border: 3px solid black;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 .collasible_container{
     background-color: gray;
