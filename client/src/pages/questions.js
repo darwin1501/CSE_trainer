@@ -5,7 +5,7 @@ import questionMaker from 'factory/questionMaker'
 import { selectionContext } from 'context/categorySelectionContext'
 import QuestionLayout from 'components/questionLayout'
 import TrainingResultViewer from 'components/TrainingResultViewer'
-import backIcon from "../icon/back.svg"
+import backIcon from '../icon/back.svg'
 import Footer from 'components/Footer'
 
 const Questions = () => {
@@ -25,8 +25,11 @@ const Questions = () => {
     correctAnswer: '',
     contributor: ''
   })
-  const [questionReferenceToLayout, setQuestionReferenceToLayout] = useState("")
-  const [questionIndexInQuestionGroup, setQuestionIndexInQuestionGroup] = useState(0)
+  const [questionReferenceToLayout, setQuestionReferenceToLayout] = useState('')
+  const [
+    questionIndexInQuestionGroup,
+    setQuestionIndexInQuestionGroup
+  ] = useState(0)
   const [scores, setScores] = useState({
     mainScore: 0,
     numerical: 0,
@@ -38,7 +41,7 @@ const Questions = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState([])
   const [questionNumber, setQuestionNumber] = useState(0)
 
-  function recordQuestion(questionData) {
+  function recordQuestion (questionData) {
     const {
       question,
       questionType,
@@ -48,16 +51,19 @@ const Questions = () => {
       questionReference
     } = questionData
 
-    if (questionReference !== "") {
+    if (questionReference !== '') {
       // group question
-      
+
       // get last item in array
       const lastQuestion = answeredQuestions[answeredQuestions.length - 1]
-      
+
       // if undefined this is the first question
-      if (lastQuestion === undefined || lastQuestion.questionReference !== questionReference) {
+      if (
+        lastQuestion === undefined ||
+        lastQuestion.questionReference !== questionReference
+      ) {
         // create question group
-        console.log("create new group")
+        console.log('create new group')
         let questionGroupData = {
           questionReference,
           questionType,
@@ -71,55 +77,62 @@ const Questions = () => {
           ]
         }
 
-        setAnsweredQuestions(prev => ([...prev, questionGroupData]))
-
+        setAnsweredQuestions(prev => [...prev, questionGroupData])
       } else {
         // check if has questionReference property
-        if (lastQuestion.hasOwnProperty("questionReference")) {
+        if (lastQuestion.hasOwnProperty('questionReference')) {
           // add the new question in the current question group
-          console.log("has reference")
+          console.log('has reference')
           // update the question group
 
           // process of updating
           // get the the copy of old answered questions
           const copyOfAnsweredQuestions = answeredQuestions
-          const findIndexOfMatchedQuestionGroup = (question) => question.questionReference === questionReference
-          const IndexOfMatchedQuestionGroup = copyOfAnsweredQuestions.findIndex(findIndexOfMatchedQuestionGroup)
-          const getMatchedQuestionGroup = copyOfAnsweredQuestions[IndexOfMatchedQuestionGroup]
+          const findIndexOfMatchedQuestionGroup = question =>
+            question.questionReference === questionReference
+          const IndexOfMatchedQuestionGroup = copyOfAnsweredQuestions.findIndex(
+            findIndexOfMatchedQuestionGroup
+          )
+          const getMatchedQuestionGroup =
+            copyOfAnsweredQuestions[IndexOfMatchedQuestionGroup]
           // insert the new question in the questions property of that object
           const modifiedQuestionGroup = {
             ...getMatchedQuestionGroup,
             questions: [
               ...getMatchedQuestionGroup.questions,
-                {
-                  question,
-                  explanation,
-                  selectedAnswer,
-                  correctAnswer
-                }
+              {
+                question,
+                explanation,
+                selectedAnswer,
+                correctAnswer
+              }
             ]
           }
           // delete the old question group in array and
           // insert the updated question group in the index of deleted old question group in array
-          copyOfAnsweredQuestions.splice(IndexOfMatchedQuestionGroup, 1, modifiedQuestionGroup)
-          
+          copyOfAnsweredQuestions.splice(
+            IndexOfMatchedQuestionGroup,
+            1,
+            modifiedQuestionGroup
+          )
+
           // insert the modified copy of answered questions
           setAnsweredQuestions(copyOfAnsweredQuestions)
         }
-        
       }
     } else {
       // ungroup question
       // add new answered question
-      setAnsweredQuestions(prev => (
-        [...prev, {
+      setAnsweredQuestions(prev => [
+        ...prev,
+        {
           question,
           questionType,
           explanation,
           selectedAnswer,
           correctAnswer
         }
-        ]))
+      ])
     }
   }
 
@@ -129,7 +142,7 @@ const Questions = () => {
         questionCount.value,
         trainingType
       )
-      
+
       setQuestions(questionsList)
       setQuestionsCount(Object.keys(questionsList).length)
     }
@@ -151,7 +164,8 @@ const Questions = () => {
         // console.log(questionIndexInQuestionGroup)
         const questionsInGroup = questionData.questions
         const questionsInGroupCount = Object.keys(questionsInGroup).length
-        const getAQuestionInGroup = questionsInGroup[questionIndexInQuestionGroup]
+        const getAQuestionInGroup =
+          questionsInGroup[questionIndexInQuestionGroup]
         const {
           _id,
           question,
@@ -159,13 +173,10 @@ const Questions = () => {
           explanation,
           choices,
           correctAnswer,
-          contributor,
+          contributor
         } = getAQuestionInGroup
 
-        const {
-          questionReference,
-          imageUrlAsReference
-        } = questionData
+        const { questionReference, imageUrlAsReference } = questionData
 
         setQuestionToLayout(prev => ({
           ...prev,
@@ -178,14 +189,14 @@ const Questions = () => {
           contributor: contributor
         }))
 
-        if (questionReference !== "") {
+        if (questionReference !== '') {
           setQuestionReferenceToLayout(questionReference)
           // console.log(questionReference)
-        } else if (imageUrlAsReference !== "") {
+        } else if (imageUrlAsReference !== '') {
           setQuestionReferenceToLayout(imageUrlAsReference)
           // console.log(imageUrlAsReference)
         }
-  
+
         setQuestionIndexInQuestionGroup(questionIndexInQuestionGroup + 1)
         console.log(questionIndexInQuestionGroup)
 
@@ -209,9 +220,9 @@ const Questions = () => {
         if (questionIndexInQuestionGroup >= questionsInGroupCount - 1) {
           setQuestionIndex(questionIndex + 1)
           setQuestionIndexInQuestionGroup(0)
-        } 
+        }
       } else {
-        setQuestionReferenceToLayout("")
+        setQuestionReferenceToLayout('')
         const {
           _id,
           question,
@@ -247,18 +258,22 @@ const Questions = () => {
   return (
     <div>
       <Link to='/quick-test/category-selection'>
-      <div >
-          <img className="back_btn" src={backIcon} alt="back button"/>
-      </div>
+        <div>
+          <img className='back_btn' src={backIcon} alt='back button' />
+        </div>
       </Link>
       {/* show question layout when start has been clicked */}
 
       {/* hide start button when clicked */}
-      <div className='flex flex-center' style={{marginBottom: "15%"}}>
+      <div className='flex flex-center' style={{ marginBottom: '15%' }}>
         {isTestStart ? (
-          isTestEnd? 
-            <TrainingResultViewer scoresData={scores} answeredQuestions={answeredQuestions} />
-           : <QuestionLayout
+          isTestEnd ? (
+            <TrainingResultViewer
+              scoresData={scores}
+              answeredQuestions={answeredQuestions}
+            />
+          ) : (
+            <QuestionLayout
               questionData={questionToLayout}
               displayQuestion={displayQuestion}
               scoresData={scores}
@@ -267,25 +282,29 @@ const Questions = () => {
               recordQuestion={recordQuestion}
               questionNumber={questionNumber}
             />
+          )
         ) : (
-          
-            <div className="flex flex-center align-center">
-              <div className="flex flex-column flex-center align-center"
-                style={{ margin: "20vh 5% 0 5%" }}>
-                <p style={{textAlign:"center", fontSize: "20px"}}><strong>Tip:</strong> Memorize the concept not the answer.</p>
-                <button
-                  onClick={() => {
-                    displayQuestion()
-                    setIsTestStart(true)
-                  }}
-                  disabled={!questions.length ? true : false}
-                  className="btn-purple"
-                  style={{width: "300px"}}
-                >
-                  {!questions.length ? 'Loading. . .' : 'Start'}
-                </button>
-              </div>
+          <div className='flex flex-center align-center'>
+            <div
+              className='flex flex-column flex-center align-center'
+              style={{ margin: '20vh 5% 0 5%' }}
+            >
+              <p style={{ textAlign: 'center', fontSize: '20px' }}>
+                <strong>Tip:</strong> Memorize the concept not the answer.
+              </p>
+              <button
+                onClick={() => {
+                  displayQuestion()
+                  setIsTestStart(true)
+                }}
+                disabled={!questions.length ? true : false}
+                className='btn-purple'
+                style={{ width: '300px' }}
+              >
+                {!questions.length ? 'Loading. . .' : 'Start'}
+              </button>
             </div>
+          </div>
         )}
       </div>
       <Footer />

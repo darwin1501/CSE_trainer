@@ -19,7 +19,7 @@ const QuestionLayout = props => {
   } = props.questionData
   const questionReferenceInQuestions = props.questionReferenceToLayout
   const LETTERS = ['A', 'B', 'C', 'D']
-  let letterCounter = 0;
+  let letterCounter = 0
 
   // set choices when page loads
 
@@ -103,17 +103,15 @@ const QuestionLayout = props => {
   }
 
   const selections = completeChoices.map(data => {
-    
     let letter = LETTERS[letterCounter]
 
     letterCounter += 1
 
     return (
-      
       <button
-      className={QuestionLayoutStyle.btn_select}
-      value={data}
-      onClick={getAnswer}
+        className={QuestionLayoutStyle.btn_select}
+        value={data}
+        onClick={getAnswer}
         disabled={disableButton}
         style={{
           backgroundColor: `${
@@ -123,14 +121,19 @@ const QuestionLayout = props => {
                 new E7A4BE
           */
             data === selected
-            ? selected === correctAnswer
-              ? '#94d7a2'
-              : '#e7a4d0'
-            : selected && data === correctAnswer && '#94d7a2'
+              ? selected === correctAnswer
+                ? '#94d7a2'
+                : '#e7a4d0'
+              : selected && data === correctAnswer && '#94d7a2'
           }`
         }}
       >
-        <div className={QuestionLayoutStyle.box_sm} style={{padding: "10px", width:"15px"}}>{ letter }</div>
+        <div
+          className={QuestionLayoutStyle.box_sm}
+          style={{ padding: '10px', width: '15px' }}
+        >
+          {letter}
+        </div>
         {data}
       </button>
     )
@@ -153,10 +156,7 @@ const QuestionLayout = props => {
         )}
       </div>
       {contributor !== null && (
-        <p
-          className={QuestionLayoutStyle.info}
-          style={{ textAlign: 'right' }}
-        >
+        <p className={QuestionLayoutStyle.info} style={{ textAlign: 'right' }}>
           <strong>Question By:</strong> <br></br>
           {contributor}
         </p>
@@ -166,7 +166,7 @@ const QuestionLayout = props => {
       </div>
       {/* conditionally renders the question reference */}
       {questionReferenceInQuestions !== '' && (
-        <div className='flex flex-center' style={{marginBottom: "60px"}}>
+        <div className='flex flex-center' style={{ marginBottom: '60px' }}>
           {hasImageToLoad === true ? (
             <img
               src={`${questionReference}`}
@@ -184,18 +184,20 @@ const QuestionLayout = props => {
           marginBottom: '20px'
         }}
       >
-        <div className={QuestionLayoutStyle.box_sm}
+        <div
+          className={QuestionLayoutStyle.box_sm}
           style={{
-            padding: "8px",
-            maxWidth: "40px",
-            maxHeight: "40px",
-            marginTop: "-10px"
-          }}>
+            padding: '8px',
+            maxWidth: '40px',
+            maxHeight: '40px',
+            marginTop: '-10px'
+          }}
+        >
           {props.questionNumber}.
         </div>
         <p
           style={{
-            marginTop: "0",
+            marginTop: '0',
             marginBottom: '20px',
             whiteSpace: 'pre-line'
           }}

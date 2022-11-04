@@ -1,7 +1,13 @@
 // returns an array of questions
-const questionMaker =  async (questionCountOnEachCategories, trainingType) => {
+const questionMaker = async (questionCountOnEachCategories, trainingType) => {
   const questions = []
-  const { numericalCount, analyticalCount, verbalCount, philConsCount, clericalCount } = questionCountOnEachCategories
+  const {
+    numericalCount,
+    analyticalCount,
+    verbalCount,
+    philConsCount,
+    clericalCount
+  } = questionCountOnEachCategories
 
   const getQuestions = async (category, questionLimit) => {
     // counter that decides wether to add question group or not
@@ -104,8 +110,6 @@ const questionMaker =  async (questionCountOnEachCategories, trainingType) => {
       await getUngroupQuestions(category, ungroupQuestionLimit)
     }
   }
-
-  
 
   if (trainingType === 'quickTraining') {
     if (numericalCount > 0) {
