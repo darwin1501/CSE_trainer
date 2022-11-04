@@ -1,10 +1,13 @@
 import React ,{useState} from 'react'
 import Collapsible from 'react-collapsible'
 import CollapsibleQuestionStyle from "./CollapsibleQuestionStyle.module.css"
+import ExpandLessIcon from "../icon/expand_less.svg"
+import ExpandMoreIcon from "../icon/expand_more.svg"
 
 export default function CollapsibleQuestion(props) {
 
-    const [questionStatus, setQuestionStatus] = useState("") 
+    const [questionStatus, setQuestionStatus] = useState("");
+    const [isExpand, setIsExpand] = useState(false);
     const CORRECT_STATUS = " #94d7a2"
     const INCORRECT_STATUS = " #e7a4d0"
 
@@ -19,9 +22,16 @@ export default function CollapsibleQuestion(props) {
         }
     )
 
+    function handleChangeExpand() {
+        setIsExpand(!isExpand)
+    }
+
     function TriggerElement() {
         return (
-            <div className={CollapsibleQuestionStyle.trigger_element}>
+            <div className={CollapsibleQuestionStyle.trigger_element}
+                onClick={() => handleChangeExpand()}
+                style={{cursor:"pointer"}}
+            >
                 
                 {/* if question number has two set of number
                     this is question group
@@ -43,6 +53,14 @@ export default function CollapsibleQuestion(props) {
                         </div>
                 }
                 <div className="flex gap-sm">{questionStatusWithStyle}</div>
+                <div style={{ marginLeft: "auto" }}>
+                    {
+                        isExpand ?
+                        <img src={ExpandLessIcon} alt="close" />
+                        :                           
+                        <img src={ExpandMoreIcon} alt="expand"/>
+                    }
+                </div>
             </div>
         )
     }
@@ -56,7 +74,7 @@ export default function CollapsibleQuestion(props) {
         }
 
         return (
-            <div>
+            <div className={CollapsibleQuestionStyle.text_container}>
                 <p>
                     <strong>Question:</strong> {props.question}
                 </p>
@@ -83,7 +101,7 @@ export default function CollapsibleQuestion(props) {
                 status += ` ${INCORRECT_STATUS}`
             }
             return (
-                <div>
+                <div className={CollapsibleQuestionStyle.text_container}>
                     <hr></hr>
                     <p>
                         <strong>Question:</strong> {questionData.question}

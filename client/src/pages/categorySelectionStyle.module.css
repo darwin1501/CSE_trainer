@@ -11,3 +11,27 @@
     font-size: 1.5rem;
     font-weight: 900;
 }
+
+@media only screen and (min-width: 520px){
+    .title{
+        font-size: 1.7rem;
+    }
+    span{
+        font-size: 1.3rem;
+    }
+}
+@media only screen and (min-width: 550px){
+    .cardContainer{
+        width: 60%;
+    }
+}
+@media only screen and (min-width: 840px){
+    .cardContainer{
+        width: 40%;
+    }
+}
+@media only screen and (min-width: 1120px){
+    .cardContainer{
+        width: 30%;
+    }
+}

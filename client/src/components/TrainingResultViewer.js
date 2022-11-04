@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { selectionContext } from "context/categorySelectionContext";
 import CollapsibleQuestion from "./CollapsibleQuestion";
 import TrainingResultViewerStyle from "./TrainingResultViewerStyle.module.css"
+import { Link } from "react-router-dom";
 
 const TrainingResultViewer = (props) => {
     let totalQuestionCount = 0
@@ -36,8 +37,6 @@ const TrainingResultViewer = (props) => {
     }
 
     function displayByCategory(categegory) {
-
-        console.log(categegory)
 
         if(categegory !== "All") {
             const questionOnCategory = props.answeredQuestions.filter(question => {
@@ -91,18 +90,34 @@ const TrainingResultViewer = (props) => {
 
     return (
         <div className="flex flex-column align-center">
-            <h2>{mainScore} / {totalQuestionCount} ({getScoreInPercentage(mainScore, totalQuestionCount)}%)</h2>
-            <h4 style={{margin: "0"}}>Your Score</h4>
+            <div className={TrainingResultViewerStyle.main_score_container}>
+                <p className={TrainingResultViewerStyle.text_main_score}>{getScoreInPercentage(mainScore, totalQuestionCount)}%</p>
+                <p className={TrainingResultViewerStyle.subtext_main_score}>({mainScore} / {totalQuestionCount})</p>
+            </div>
+            <h4 style={{margin: "0"}}>You Score</h4>
             {numericalCount > 0 && <p>Numerical: {numerical} / {numericalCount} ({ getScoreInPercentage(numerical, numericalCount)}%)</p>}
-            {analyticalCount > 0&& <p>Analytical: {analytical} / { analyticalCount } ({ getScoreInPercentage(analytical, analyticalCount)}%)</p>}
-            {verbalCount > 0 && <p>Verbal: {verbal} / { verbalCount } ({ getScoreInPercentage(verbal, verbalCount)}%)</p>}
-            {philConsCount > 0 && <p>Philippine Constitution: {philConstitution} / { philConsCount } ({ getScoreInPercentage(philConstitution, philConsCount)}%)</p>}
-            {clericalCount > 0 && <p>Clerical: {clerical} / { clericalCount } ({ getScoreInPercentage(clerical, clericalCount)}%)</p>}
-            <div style={{ marginTop: "40px" }}>
+            {analyticalCount > 0&& <p><b>Analytical:</b> {analytical} / { analyticalCount } ({ getScoreInPercentage(analytical, analyticalCount)}%)</p>}
+            {verbalCount > 0 && <p><b>Verbal:</b> {verbal} / { verbalCount } ({ getScoreInPercentage(verbal, verbalCount)}%)</p>}
+            {philConsCount > 0 && <p><b>Philippine Constitution:</b> {philConstitution} / { philConsCount } ({ getScoreInPercentage(philConstitution, philConsCount)}%)</p>}
+            {clericalCount > 0 && <p><b>Clerical:</b> {clerical} / { clericalCount } ({ getScoreInPercentage(clerical, clericalCount)}%)</p>}
+            <div className="flex flex-center gap-sm">
+                <p>Try Again?</p>
+                <Link to="/trainingtype">
+                    <div className="btn-simple" style={{padding: "5px !important"}}>
+                        Yes
+                    </div>
+                </Link>
+                <Link to="/">
+                    <div className="btn-simple" style={{padding: "5px !important"}}>
+                        No
+                    </div>
+                </Link>
+            </div>
+            <div style={{ marginTop: "80px" }}>
                 <div className="flex flex-center">
                     <div className="flex flex-wrap flex-center gap-sm">
                     <button 
-                        className={TrainingResultViewerStyle.btn_categories}
+                        className="btn-simple"
                         onClick={() => {
                             displayByCategory("All")
                         }}
@@ -112,7 +127,7 @@ const TrainingResultViewer = (props) => {
                     {
                         analyticalCount > 0 &&
                         <button 
-                            className={TrainingResultViewerStyle.btn_categories}
+                        className="btn-simple"
                             onClick={() => {
                                 displayByCategory("Analytical")
                             }}
@@ -123,7 +138,7 @@ const TrainingResultViewer = (props) => {
                     {
                         numericalCount > 0 &&
                         <button 
-                            className={TrainingResultViewerStyle.btn_categories}
+                            className="btn-simple"
                             onClick={() => {
                                 displayByCategory("Numerical")
                             }}
@@ -134,7 +149,7 @@ const TrainingResultViewer = (props) => {
                     {
                         verbalCount > 0 &&
                         <button 
-                            className={TrainingResultViewerStyle.btn_categories}
+                            className="btn-simple"
                             onClick={() => {
                                 displayByCategory("Verbal")
                             }}
@@ -145,10 +160,10 @@ const TrainingResultViewer = (props) => {
                     {
                         philConsCount > 0 &&
                         <button 
-                        className={TrainingResultViewerStyle.btn_categories}
-                        onClick={() => {
-                            displayByCategory("philCons")
-                        }}
+                            className="btn-simple"
+                            onClick={() => {
+                                displayByCategory("philCons")
+                            }}
                         >
                         Philippine Constitution
                         </button>
@@ -156,17 +171,17 @@ const TrainingResultViewer = (props) => {
                     {
                         clericalCount > 0 &&
                         <button 
-                        className={TrainingResultViewerStyle.btn_categories}
-                        onClick={() => {
-                            displayByCategory("Clerical")
-                        }}
+                            className="btn-simple"
+                            onClick={() => {
+                                displayByCategory("Clerical")
+                            }}
                         >
                         Clerical
                         </button>
                     }
                     </div>
                 </div>
-                <div  className="flex flex-column gap-md" style={{ marginTop: "40px" }}>
+                <div  className={`flex flex-column gap-md ${TrainingResultViewerStyle.answered_question_container}`} style={{ marginTop: "20px", marginBottom: "15%" }}>
                     {answeredQuestions}
                 </div>
             </div>

@@ -4,6 +4,8 @@ import CategorySelectionStyle from './categorySelectionStyle.module.css'
 // import { CategorySelectionConsumer } from 'context/categorySelectionContext'
 import { selectionContext } from 'context/categorySelectionContext'
 import { useNavigate } from 'react-router-dom'
+import backIcon from "../icon/back.svg"
+import Footer from 'components/Footer'
 
 
 const CategorySelection = () => {
@@ -53,13 +55,11 @@ const CategorySelection = () => {
   
 
   return (
-    <div>
+    <div style={{paddingBottom: "250px"}}>
       <Link to='/trainingtype'>
-        <div>
-          <span className='material-symbols-outlined back-icon'>
-            arrow_back_ios
-          </span>
-        </div>
+      <div >
+          <img className="back_btn" src={backIcon} alt="back button"/>
+      </div>
       </Link>
       <div className={`${CategorySelectionStyle.cardContainer} shadow-sm`}>
         <p className={CategorySelectionStyle.title}>Select Categories</p>
@@ -129,6 +129,7 @@ const CategorySelection = () => {
             </div>
           </form>
       </div>
+      <Footer />
     </div>
   )
 }

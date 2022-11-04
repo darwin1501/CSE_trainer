@@ -6,14 +6,18 @@
 
 .trigger_element{
     height: 20px;
-    border: 3px solid black;
+    border: 1px solid #2b2839;
     display: flex;
     align-items: center;
     gap: 10px;
+    border-radius: 3px;
 }
 .collasible_container{
-    background-color: gray;
-    
+    background-color: rgb(223, 235, 240);
+    /* border: solid #2b2839; */
+    border-left: 1px solid #2b2839;;
+    border-right: 1px solid #2b2839;;
+    border-bottom: 1px solid #2b2839;;
 }
 
 .number_box{
@@ -25,4 +29,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (min-width: 1000px){
+    .text_container > p {
+        font-size: 20px;
+    }
 }

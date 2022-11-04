@@ -137,98 +137,102 @@ const QuestionLayout = props => {
   })
 
   return (
-    <div className={QuestionLayoutStyle.bg}>
-      <div className={QuestionLayoutStyle.container}>
-        <div className='flex flex-end'>
-          {selected !== '' && (
-            <button
-              onClick={() => {
-                props.displayQuestion()
-                setDisableButton(false)
-                setShowExplanation(false)
-              }}
-              className="btn-simple"
-            >
-              Next
-            </button>
-          )}
-        </div>
-        {contributor !== null && (
-          <p
-            className={QuestionLayoutStyle.info}
-            style={{ textAlign: 'right' }}
-          >
-            <strong>Question By:</strong> <br></br>
-            {contributor}
-          </p>
-        )}
-        <div className='flex flex-start'>
-          <p className={QuestionLayoutStyle.info}>{questionType}</p>
-        </div>
-        <div className={QuestionLayoutStyle.box_sm} style={{ padding: "8px", width: "15px", marginBottom: "20px" }}>
-          {props.questionNumber}.
-        </div>
-        {/* conditionally renders the question reference */}
-        {questionReferenceInQuestions !== '' && (
-          <div className='flex flex-center'>
-            {hasImageToLoad === true ? (
-              <img
-                src={`${questionReference}`}
-                alt='question reference'
-                className={QuestionLayoutStyle.img_reference}
-              />
-            ) : (
-              <p style={{ whiteSpace: 'pre-line' }}>{questionReference}</p>
-            )}
-          </div>
-        )}
-        <div
-          className={`flex flex-center ${QuestionLayoutStyle.question_text}`}
-          style={{
-            marginBottom: '20px'
-          }}
-        >
-          <p
-            style={{
-              marginTop: '10px',
-              marginBottom: '20px',
-              whiteSpace: 'pre-line'
+    <div className={QuestionLayoutStyle.container}>
+      <div className='flex flex-end'>
+        {selected !== '' && (
+          <button
+            onClick={() => {
+              props.displayQuestion()
+              setDisableButton(false)
+              setShowExplanation(false)
             }}
+            className={`btn-purple ${QuestionLayoutStyle.btn_next}`}
           >
-            {question}
-          </p>
-        </div>
-        <div className=' flex flex-center'>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              gap: '30px'
-            }}
-          >
-            {selections}
-          </div>
-        </div>
-        <div
-          className='flex flex-end'
-          style={{
-            fontWeight: 'bolder'
-          }}
-        ></div>
-        {showExplanation && explanation !== 'None' && (
-          <div className={QuestionLayoutStyle.explanation_container}>
-            <p
-              style={{
-                fontWeight: 'bolder'
-              }}
-            >
-              Explanation
-            </p>
-            <p style={{ whiteSpace: 'pre-line' }}>{explanation}</p>
-          </div>
+            Next
+          </button>
         )}
       </div>
+      {contributor !== null && (
+        <p
+          className={QuestionLayoutStyle.info}
+          style={{ textAlign: 'right' }}
+        >
+          <strong>Question By:</strong> <br></br>
+          {contributor}
+        </p>
+      )}
+      <div className='flex flex-center'>
+        <p className={QuestionLayoutStyle.info}>{questionType}</p>
+      </div>
+      {/* conditionally renders the question reference */}
+      {questionReferenceInQuestions !== '' && (
+        <div className='flex flex-center' style={{marginBottom: "60px"}}>
+          {hasImageToLoad === true ? (
+            <img
+              src={`${questionReference}`}
+              alt='question reference'
+              className={QuestionLayoutStyle.img_reference}
+            />
+          ) : (
+            <p style={{ whiteSpace: 'pre-line' }}>{questionReference}</p>
+          )}
+        </div>
+      )}
+      <div
+        className={`flex flex-center align-left gap-md ${QuestionLayoutStyle.question_text}`}
+        style={{
+          marginBottom: '20px'
+        }}
+      >
+        <div className={QuestionLayoutStyle.box_sm}
+          style={{
+            padding: "8px",
+            maxWidth: "40px",
+            maxHeight: "40px",
+            marginTop: "-10px"
+          }}>
+          {props.questionNumber}.
+        </div>
+        <p
+          style={{
+            marginTop: "0",
+            marginBottom: '20px',
+            whiteSpace: 'pre-line'
+          }}
+        >
+          {question}
+        </p>
+      </div>
+      <div className=' flex flex-center'>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            gap: '30px'
+          }}
+        >
+          {selections}
+        </div>
+      </div>
+      <div
+        className='flex flex-end'
+        style={{
+          fontWeight: 'bolder'
+        }}
+      ></div>
+      {showExplanation && explanation !== 'None' && (
+        <div className={QuestionLayoutStyle.explanation_container}>
+          <p
+            style={{
+              fontWeight: 'bolder'
+            }}
+          >
+            Explanation
+          </p>
+          <p style={{ whiteSpace: 'pre-line' }}>{explanation}</p>
+        </div>
+      )}
     </div>
   )
 }

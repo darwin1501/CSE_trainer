@@ -1,15 +1,4 @@
 
-/* color result */
-
-.bg{
-    background-color: #eef6f0;
-    position:absolute;
-    top:0px;
-    right:0px;
-    bottom:0px;
-    left:0px;
-    overflow-y: scroll;
-}
 .btn_select{
     padding: 10px;
     border-radius: 3px;
@@ -28,12 +17,14 @@
 .btn_select:hover{
     background-color: rgb(223, 235, 240);
 }
-/* .btn_select:focus{
-    background-color: white;
-} */
+.btn_next{
+    width: 100px;
+    padding: 15px !important;
+}
 .container{
     width: 90%;
-    margin: 3vh auto;
+    margin: 1vh auto 15vh auto;
+    background-color: #eef6f0;
 }
 .explanation_container{
     padding: 10px;
@@ -70,5 +61,15 @@
 @media only screen and (min-width: 320px){
     .img_reference{
         width: 130%;
+    }
+}
+@media only screen and (min-width: 850px){
+    container{
+        margin-bottom: 20vh; 
+    }
+}
+@media only screen and (min-width: 750px){
+    .img_reference{
+        max-width: 700px;
     }
 }

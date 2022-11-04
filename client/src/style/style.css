@@ -7,9 +7,12 @@ body{
 }
 
 
-.back-icon{
-  padding: 10px;
+.back_btn{
+  width: 38px;
+  margin: 10px;
+  cursor: pointer;
 }
+
 .checkbox{
   width: 25px;
   height: 25px;
@@ -19,11 +22,15 @@ a{
   color: inherit; 
 }
 
+@media only screen and (min-width: 950px){
+  .back_btn{
+    margin: 20px;
+  }
+}
 
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
+@media only screen and (min-width: 520px){
+  .checkbox{
+    width: 35px;
+    height: 35px;
+  }
 }

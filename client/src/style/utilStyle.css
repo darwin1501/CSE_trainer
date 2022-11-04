@@ -4,6 +4,9 @@
 .align-center{
     align-items: center;
 }
+.btn-simple, .btn-purple{
+    cursor: pointer;
+}
 
 .btn-simple{
     padding: 15px 25px 15px 25px;
@@ -11,7 +14,28 @@
     border: 1px solid #2b2839;
     background-color: white;
     font-family: inherit;
-    cursor: pointer;
+}
+.btn-simple:hover{
+    background-color: rgb(223, 235, 240)
+}
+
+.btn-purple{
+    font-family: 'Karla', Arial, sans-serif;
+    padding: 25px;
+    border-radius: 40px;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: #5035ff;
+    color: white;
+    transition-timing-function: ease;
+    transition: transform 0.3s;
+    backface-visibility: hidden;
+}
+
+.btn-purple:hover{
+    transform: translateY(-4px);
+    box-shadow: 2px 2px 20px 20px rgb(205, 205, 205);
 }
 
 .flex{

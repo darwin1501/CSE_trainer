@@ -5,6 +5,8 @@ import questionMaker from 'factory/questionMaker'
 import { selectionContext } from 'context/categorySelectionContext'
 import QuestionLayout from 'components/questionLayout'
 import TrainingResultViewer from 'components/TrainingResultViewer'
+import backIcon from "../icon/back.svg"
+import Footer from 'components/Footer'
 
 const Questions = () => {
   const { trainingType } = useParams()
@@ -245,16 +247,14 @@ const Questions = () => {
   return (
     <div>
       <Link to='/quick-test/category-selection'>
-        <div>
-          <span className='material-symbols-outlined back-icon'>
-            arrow_back_ios
-          </span>
-        </div>
+      <div >
+          <img className="back_btn" src={backIcon} alt="back button"/>
+      </div>
       </Link>
       {/* show question layout when start has been clicked */}
 
       {/* hide start button when clicked */}
-      <div className='flex flex-center'>
+      <div className='flex flex-center' style={{marginBottom: "15%"}}>
         {isTestStart ? (
           isTestEnd? 
             <TrainingResultViewer scoresData={scores} answeredQuestions={answeredQuestions} />
@@ -269,23 +269,26 @@ const Questions = () => {
             />
         ) : (
           
-            <div className="flex flex-center">
-              <div className="flex flex-column flex-center align-center">
-              <p style={{textAlign:"center"}}><strong>Tip:</strong> Memorize the concept not the answer.</p>
-              <button
-                onClick={() => {
-                  displayQuestion()
-                  setIsTestStart(true)
-                }}
-                disabled={!questions.length ? true : false}
-                className="btn-simple"
-              >
-                {!questions.length ? 'Loading. . .' : 'Start'}
-              </button>
-            </div>
+            <div className="flex flex-center align-center">
+              <div className="flex flex-column flex-center align-center"
+                style={{ margin: "20vh 5% 0 5%" }}>
+                <p style={{textAlign:"center", fontSize: "20px"}}><strong>Tip:</strong> Memorize the concept not the answer.</p>
+                <button
+                  onClick={() => {
+                    displayQuestion()
+                    setIsTestStart(true)
+                  }}
+                  disabled={!questions.length ? true : false}
+                  className="btn-purple"
+                  style={{width: "300px"}}
+                >
+                  {!questions.length ? 'Loading. . .' : 'Start'}
+                </button>
+              </div>
             </div>
         )}
       </div>
+      <Footer />
     </div>
   )
 }
