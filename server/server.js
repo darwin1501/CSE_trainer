@@ -27,7 +27,7 @@ app.listen(port, () => {
 });
 
 // all your routes should go here
-app.use('/some-route', require(path.join(__dirname, 'api', 'routes', 'question.js')))
+app.use('/some-route', require(path.join(__dirname, 'routes', 'question.js')))
 
 // static files (build of your frontend)
 if (process.env.NODE_ENV === 'production') {
