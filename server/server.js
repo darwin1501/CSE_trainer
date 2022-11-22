@@ -5,9 +5,9 @@ const app = express();
 const cors = require("cors");
 
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({path: __dirname+'/.env'});
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config({path: __dirname+'/.env'});
+// }
 
 // require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
@@ -27,7 +27,7 @@ app.listen(port, () => {
 });
 
 // all your routes should go here
-app.use('/some-route', require(path.join(__dirname, 'routes', 'question.js')))
+// app.use('/some-route', require(path.join(__dirname, 'routes', 'question.js')))
 
 // static files (build of your frontend)
 if (process.env.NODE_ENV === 'production') {
