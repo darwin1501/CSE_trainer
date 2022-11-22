@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <CategorySelectionProvider>
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename='/'>
         <Routes>
           <Route path='/' element={<App />} />
           <Route path='/trainingtype' element={<TrainingType />} />
