@@ -31,9 +31,9 @@ app.use('/some-route', require(path.join(__dirname, 'routes', 'question.js')))
 
 // static files (build of your frontend)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client', 'build')));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'));
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
   })
 }
 
