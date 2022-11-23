@@ -15,7 +15,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // get questions and push it to question array
     const getUngroupQuestions = async (category, questionLimit) => {
       const response = await fetch(
-        `http://localhost:5000/questions/get/${category}/${questionLimit}`
+        `http://cse-trainer.vercel.app/questions/get/${category}/${questionLimit}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
@@ -32,7 +32,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // returns an array of question group
     const getQuestionGroup = async category => {
       const response = await fetch(
-        `http://localhost:5000/question-groups/get/${category}`
+        `http://cse-trainer.vercel.app/question-groups/get/${category}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
