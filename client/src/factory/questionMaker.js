@@ -15,7 +15,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // get questions and push it to question array
     const getUngroupQuestions = async (category, questionLimit) => {
       const response = await fetch(
-        `https://cse-trainer.vercel.app//some-route/questions/get/${category}/${questionLimit}`
+        `https://cse-trainer.vercel.app/some-route/questions/get/${category}/${questionLimit}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
