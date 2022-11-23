@@ -33,7 +33,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // returns an array of question group
     const getQuestionGroup = async category => {
       const response = await fetch(
-        `http://${baseURL}/question-groups/get/${category}`
+        `https://${baseURL}/question-groups/get/${category}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
