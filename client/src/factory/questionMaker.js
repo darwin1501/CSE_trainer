@@ -1,3 +1,4 @@
+const baseURL = 'cse-questions-api.onrender.com'
 // returns an array of questions
 const questionMaker = async (questionCountOnEachCategories, trainingType) => {
   const questions = []
@@ -15,7 +16,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // get questions and push it to question array
     const getUngroupQuestions = async (category, questionLimit) => {
       const response = await fetch(
-        `http://localhost:5000/questions/get/${category}/${questionLimit}`
+        `https://${baseURL}/questions/get/${category}/${questionLimit}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
