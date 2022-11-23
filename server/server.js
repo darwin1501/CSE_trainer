@@ -9,11 +9,11 @@ const cors = require("cors");
 //   require('dotenv').config({path: __dirname+'/.env'});
 // }
 
-// require("dotenv").config({ path: "./config.env" });
+require("dotenv").config({ path: "./config.env" });
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
-app.use(require("./routes/question"));
+// app.use(require("./routes/question"));
 // get driver connection
 const dbo = require("./db/conn");
 
@@ -27,7 +27,7 @@ app.listen(port, () => {
 });
 
 // all your routes should go here
-// app.use('/some-route', require(path.join(__dirname, 'routes', 'question.js')))
+app.use('/some-route', require(path.join(__dirname, 'routes', 'question.js')))
 
 // static files (build of your frontend)
 if (process.env.NODE_ENV === 'production') {
