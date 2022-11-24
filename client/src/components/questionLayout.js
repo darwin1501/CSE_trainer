@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import QuestionLayoutStyle from './QuestionLayoutStyle.module.css'
+import backIcon from '../icon/back.svg'
+import { Link } from 'react-router-dom'
 
 const QuestionLayout = props => {
   const [showExplanation, setShowExplanation] = React.useState(false)
@@ -141,18 +143,27 @@ const QuestionLayout = props => {
 
   return (
     <div className={QuestionLayoutStyle.container}>
-      <div className='flex flex-end'>
+      <div className='flex' style={{width: "100%"}}>
+      <div style={{marginRight: "auto", right: "95%"}}>
+        <Link to='/quick-test/category-selection'>
+          <div>
+            <img className='back_btn' src={backIcon} alt='back button' />
+          </div>
+        </Link>
+      </div>
         {selected !== '' && (
-          <button
-            onClick={() => {
-              props.displayQuestion()
-              setDisableButton(false)
-              setShowExplanation(false)
-            }}
-            className={`btn-purple ${QuestionLayoutStyle.btn_next}`}
-          >
-            Next
-          </button>
+          <div style={{marginLeft: "auto"}}>
+            <button
+              onClick={() => {
+                props.displayQuestion()
+                setDisableButton(false)
+                setShowExplanation(false)
+              }}
+              className={`btn-purple ${QuestionLayoutStyle.btn_next}`}
+            >
+              Next
+            </button>
+          </div>
         )}
       </div>
       {contributor !== null && (

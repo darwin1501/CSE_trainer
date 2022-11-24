@@ -3,6 +3,9 @@
     border: 2px solid black;
     border-radius: 5px;
 }
+.main_score_container{
+    margin-top: 50px;
+}
 .main_score_container > p{
     margin: 0;
     text-align: center;
