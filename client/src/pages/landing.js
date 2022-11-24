@@ -2,7 +2,7 @@ import LandingStyle from './landingStyle.module.css'
 import { Link } from 'react-router-dom'
 import Footer from 'components/Footer'
 
-function Landing () {
+function Landing() {
   return (
     <div className={LandingStyle.container}>
       <p className={LandingStyle.title}>CSE Trainer</p>

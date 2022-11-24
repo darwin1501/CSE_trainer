@@ -1,4 +1,7 @@
-const baseURL = 'cse-questions-api.onrender.com'
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://cse-questions-api.onrender.com'
+    : 'http://localhost:5000'
 // returns an array of questions
 const questionMaker = async (questionCountOnEachCategories, trainingType) => {
   const questions = []
@@ -16,7 +19,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // get questions and push it to question array
     const getUngroupQuestions = async (category, questionLimit) => {
       const response = await fetch(
-        `https://${baseURL}/questions/get/${category}/${questionLimit}`
+        `${baseURL}/questions/get/${category}/${questionLimit}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
@@ -33,7 +36,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
     // returns an array of question group
     const getQuestionGroup = async category => {
       const response = await fetch(
-        `https://${baseURL}/question-groups/get/${category}`
+        `${baseURL}/question-groups/get/${category}`
       )
       if (!response.ok) {
         const message = `An error occured: ${response.statusText}`
