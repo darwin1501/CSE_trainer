@@ -105,40 +105,41 @@ const QuestionLayout = props => {
   }
 
   const selections = completeChoices.map(data => {
-    let letter = LETTERS[letterCounter]
+    if (data !== 'none') {
+      let letter = LETTERS[letterCounter]
 
-    letterCounter += 1
-
-    return (
-      <button
-        className={QuestionLayoutStyle.btn_select}
-        value={data}
-        onClick={getAnswer}
-        disabled={disableButton}
-        style={{
-          backgroundColor: `${
-            /* 
-            correct #94d7a2
-            incorrect #e7a4d0
-                new E7A4BE
-          */
-            data === selected
-              ? selected === correctAnswer
-                ? '#94d7a2'
-                : '#e7a4d0'
-              : selected && data === correctAnswer && '#94d7a2'
-          }`
-        }}
-      >
-        <div
-          className={QuestionLayoutStyle.box_sm}
-          style={{ padding: '10px', width: '15px' }}
+      letterCounter += 1
+      return (
+        <button
+          className={QuestionLayoutStyle.btn_select}
+          value={data}
+          onClick={getAnswer}
+          disabled={disableButton}
+          style={{
+            backgroundColor: `${
+              /* 
+              correct #94d7a2
+              incorrect #e7a4d0
+                  new E7A4BE
+            */
+              data === selected
+                ? selected === correctAnswer
+                  ? '#94d7a2'
+                  : '#e7a4d0'
+                : selected && data === correctAnswer && '#94d7a2'
+            }`
+          }}
         >
-          {letter}
-        </div>
-        {data}
-      </button>
-    )
+          <div
+            className={QuestionLayoutStyle.box_sm}
+            style={{ padding: '10px', width: '15px' }}
+          >
+            {letter}
+          </div>
+          {data}
+        </button>
+      )
+    }
   })
 
   return (

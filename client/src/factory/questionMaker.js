@@ -1,7 +1,8 @@
+const PORT = 3080
 const baseURL =
   process.env.NODE_ENV === 'production'
     ? 'https://cse-questions-api.onrender.com'
-    : 'http://localhost:5000'
+    : `http://localhost:${PORT}`
 // returns an array of questions
 const questionMaker = async (questionCountOnEachCategories, trainingType) => {
   const questions = []
