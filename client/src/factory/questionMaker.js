@@ -34,20 +34,30 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
         questions.push(questionData)
       })
     }
+    async function delay(t) {
+      return new Promise(resolve => setTimeout(resolve, t));
+    }
     // returns an array of question group
-    const getQuestionGroup = async category => {
-      const response = await fetch(
-        `${baseURL}/question-groups/get/${category}`
-      )
-      if (!response.ok) {
-        const message = `An error occured: ${response.statusText}`
-        window.alert(message)
-        return
+    const getQuestionGroup = async (category , retryCount=5, retryDelay=2000)=> {
+      try {
+        const response = await fetch(
+          `${baseURL}/question-groups/get/${category}`
+        )
+        // if (!response.ok) {
+        //   const message = `An error occured: ${response.statusText}`
+        //   window.alert(message)
+        //   return
+        // }
+  
+        const result = await response.json()
+  
+        return result
+      } catch (err) {
+        if (retryCount <= 0) throw err;
+        console.log("retrying. . . ")
+        await delay(retryDelay);
+        getQuestionGroup(category,  retryCount-1, retryDelay)
       }
-
-      const result = await response.json()
-
-      return result
     }
 
     if (mixWithQuestionGroup === 0) {
