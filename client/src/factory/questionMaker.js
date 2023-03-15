@@ -74,7 +74,7 @@ const questionMaker = async (questionCountOnEachCategories, trainingType) => {
         }
         return sourceArray
       }
-      const shuffledQuestionGroup = await shuffle( await questionGroup)
+      const shuffledQuestionGroup = await shuffle( questionGroup)
       let questionGroupAdded = 0
       let ungroupQuestionLimit = 0
       let questionGroupQuestionsLimit = 0
